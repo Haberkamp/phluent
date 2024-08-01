@@ -12,7 +12,10 @@
     "autoload-dev": {
         "psr-4": {
             "Phluent\\Tests\\": "tests/"
-        }
+        },
+        "files": [
+            "src/Expect.php"
+        ]
     },
     "minimum-stability": "dev",
     "require-dev": {
