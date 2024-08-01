@@ -1,8 +1,8 @@
 <?php
 
-namespace Doblhofer\Tests;
+namespace Phluent\Tests;
 
-use Doblhofer\HelloWorld;
+use Phluent\HelloWorld;
 use PHPUnit\Framework\TestCase;
 
 class HelloWorldTest extends TestCase

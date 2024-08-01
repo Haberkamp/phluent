@@ -1,6 +1,6 @@
 <?php
 
-namespace Doblhofer;
+namespace Phluent;
 
 class HelloWorld {
     public function sayHello() {

@@ -1,22 +1,21 @@
 {
-    "name": "doblhofer/helloworld",
+    "name": "haberkamp/phluent",
     "description": "This is an example project to show how to create a composer package with PHPUnit tests",
     "type": "library",
-    "license": "Apache-2.0",
+    "license": "MIT",
+    "author": "Nils Haberkamp",
     "autoload": {
         "psr-4": {
-            "Doblhofer\\": "src/"
+            "Phluent\\": "src/"
         }
     },
-    "authors": [
-        {
-            "name": "Philipp Doblhofer",
-            "email": "3565206-philipp.doblhofer@users.noreply.gitlab.com"
+    "autoload-dev": {
+        "psr-4": {
+            "Phluent\\Tests\\": "tests/"
         }
-    ],
-    "homepage": "https://www.philipp-doblhofer.at/en/blog/custom-php-composer-package-on-gitlab-with-phpunit-tests/",
+    },
     "minimum-stability": "dev",
     "require-dev": {
-        "phpunit/phpunit": "^10.1@dev"
+        "phpunit/phpunit": "^11.2"
     }
 }
