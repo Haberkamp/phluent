@@ -2,5 +2,8 @@
 
 namespace Phluent;
 
-function Expect() {}
+function Expect(mixed $value): FluentAssert
+{
+    return new FluentAssert($value);
+}
 
