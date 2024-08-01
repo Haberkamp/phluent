@@ -32,4 +32,28 @@ class BooleanAssertionTest extends TestCase
         // ACT
         Expect($value)->toBeTrue();
     }
+
+    #[Test]
+    public function passes_when_expecting_false_and_getting_false()
+    {
+       // ARRANGE
+       $value = false;
+
+       // ACT & ASSERT
+       Expect($value)->toBeFalse();
+    }
+
+    #[Test]
+    public function fails_when_expecting_false_and_getting_true(): void
+    {
+      // ARRANGE
+      $value = true;
+
+      // ASSERT
+      // TODO: assert assertion message
+      $this->expectException(AssertionFailedError::class);
+
+      // ACT
+      Expect($value)->toBeFalse();
+    }
 }
