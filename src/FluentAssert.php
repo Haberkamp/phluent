@@ -5,6 +5,8 @@ namespace Phluent;
 use PHPUnit\Framework\Assert;
 
 class FluentAssert extends Assert {
+    private bool $inverse = false;
+
     public function __construct(private readonly mixed $value)
     {
     }
@@ -21,6 +23,18 @@ class FluentAssert extends Assert {
 
     public function toBeABoolean(): void
     {
+        if ($this->inverse) {
+            self::assertIsNotBool($this->value);
+            return;
+        }
+
         self::assertIsBool($this->value);
+    }
+
+    public function not(): static
+    {
+        $this->inverse = true;
+
+        return $this;
     }
 }
