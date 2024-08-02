@@ -58,7 +58,7 @@ class BooleanAssertionTest extends TestCase
     }
 
     #[Test]
-    public function passes_when_expecting_false_and_getting_false()
+    public function passes_when_expecting_false_and_getting_false(): void
     {
        // ARRANGE
        $value = false;
