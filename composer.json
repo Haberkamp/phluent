@@ -1,5 +1,5 @@
 {
-    "name": "haberkamp/phluent",
+    "name": "phluent/phluent",
     "description": "This is an example project to show how to create a composer package with PHPUnit tests",
     "type": "library",
     "license": "MIT",
