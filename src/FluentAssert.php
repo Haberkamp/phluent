@@ -13,6 +13,11 @@ class FluentAssert extends Assert {
 
     public function toBeTrue(): void
     {
+        if ($this->inverse) {
+            self::assertFalse($this->value);
+            return;
+        }
+
         self::assertTrue($this->value);
     }
 
