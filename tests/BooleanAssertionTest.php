@@ -67,4 +67,20 @@ class BooleanAssertionTest extends TestCase
         // ACT & ASSERT
         Expect($value)->toBeABoolean();
     }
+
+    #[Test]
+    #[TestWith([1])]
+    #[TestWith([0])]
+    #[TestWith(['true'])]
+    #[TestWith(['false'])]
+    #[TestWith([null])]
+    #[TestWith([[]])]
+    public function fails_when_expecting_a_boolean_value_and_not_getting_a_boolean_value(mixed $value): void
+    {
+        // ASSERT
+        $this->expectException(AssertionFailedError::class);
+
+        // ACT
+        Expect($value)->toBeABoolean();
+    }
 }
