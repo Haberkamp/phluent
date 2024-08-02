@@ -43,6 +43,11 @@ class FluentAssert extends Assert {
 
     public function toBeNull(): void
     {
+        if ($this->inverse) {
+            self::assertNotNull($this->value);
+            return;
+        }
+
         self::assertNull($this->value);
     }
 
