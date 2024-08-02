@@ -3,8 +3,8 @@
 namespace Phluent\Tests;
 
 use PHPUnit\Framework\AssertionFailedError;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
-use PHPUnit\Framework\Attributes\TestWith;
 use PHPUnit\Framework\TestCase;
 use function Phluent\Expect;
 
@@ -21,13 +21,7 @@ class NullAssertionTest extends TestCase
     }
 
     #[Test]
-    #[TestWith([false])]
-    #[TestWith([true])]
-    #[TestWith([''])]
-    #[TestWith(['some-string'])]
-    #[TestWith([0])]
-    #[TestWith([1])]
-    #[TestWith([[]])]
+    #[DataProvider('provideNonNullValues')]
     public function fails_when_expecting_null_and_not_getting_null(mixed $value): void
     {
        // ASSERT
@@ -38,13 +32,7 @@ class NullAssertionTest extends TestCase
     }
 
     #[Test]
-    #[TestWith([false])]
-    #[TestWith([true])]
-    #[TestWith([''])]
-    #[TestWith(['some-string'])]
-    #[TestWith([0])]
-    #[TestWith([1])]
-    #[TestWith([[]])]
+    #[DataProvider('provideNonNullValues')]
     public function passes_when_not_expecting_null_and_not_getting_null(mixed $value): void
     {
        // ACT & ASSERT
@@ -62,5 +50,18 @@ class NullAssertionTest extends TestCase
 
        // ACT
        Expect($value)->not()->toBeNull();
+    }
+
+    public static function provideNonNullValues(): array
+    {
+        return [
+            [false],
+            [true],
+            [''],
+            ['some-string'],
+            [0],
+            [1],
+            [[]],
+        ];
     }
 }
