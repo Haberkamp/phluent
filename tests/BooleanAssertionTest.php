@@ -82,6 +82,29 @@ class BooleanAssertionTest extends TestCase
     }
 
     #[Test]
+    public function passes_when_not_expecting_false_and_not_getting_false(): void
+    {
+        // ARRANGE
+        $value = true;
+
+        // ACT & ASSERT
+        Expect($value)->not()->toBeFalse();
+    }
+
+    #[Test]
+    public function fails_when_not_expecting_false_and_getting_false(): void
+    {
+        // ARRANGE
+        $value = false;
+
+        // ASSERT
+        $this->expectException(AssertionFailedError::class);
+
+        // ACT
+       Expect($value)->not()->toBeFalse();
+    }
+
+    #[Test]
     #[DataProvider('provideBooleanValues')]
     public function passes_when_expecting_a_boolean_value_and_getting_a_boolean_value(bool $value): void
     {
