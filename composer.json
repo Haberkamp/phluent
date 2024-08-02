@@ -1,6 +1,7 @@
 {
     "name": "phluent/phluent",
     "description": "This is an example project to show how to create a composer package with PHPUnit tests",
+    "version": "0.0.2",
     "type": "library",
     "license": "MIT",
     "author": "Nils Haberkamp",
