@@ -3,8 +3,8 @@
 namespace Phluent\Tests;
 
 use PHPUnit\Framework\AssertionFailedError;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
-use PHPUnit\Framework\Attributes\TestWith;
 use PHPUnit\Framework\TestCase;
 use function Phluent\Expect;
 
@@ -59,8 +59,7 @@ class BooleanAssertionTest extends TestCase
     }
 
     #[Test]
-    #[TestWith([true])]
-    #[TestWith([false])]
+    #[DataProvider('provideBooleanValues')]
     public function passes_when_expecting_a_boolean_value_and_getting_a_boolean_value(bool $value): void
     {
         // ACT & ASSERT
@@ -68,12 +67,7 @@ class BooleanAssertionTest extends TestCase
     }
 
     #[Test]
-    #[TestWith([1])]
-    #[TestWith([0])]
-    #[TestWith(['true'])]
-    #[TestWith(['false'])]
-    #[TestWith([null])]
-    #[TestWith([[]])]
+    #[DataProvider('provideNonBooleanValues')]
     public function fails_when_expecting_a_boolean_value_and_not_getting_a_boolean_value(mixed $value): void
     {
         // ASSERT
@@ -84,12 +78,7 @@ class BooleanAssertionTest extends TestCase
     }
 
     #[Test]
-    #[TestWith([1])]
-    #[TestWith([0])]
-    #[TestWith(['true'])]
-    #[TestWith(['false'])]
-    #[TestWith([null])]
-    #[TestWith([[]])]
+    #[DataProvider('provideNonBooleanValues')]
     public function passes_when_not_expecting_a_boolean_value_and_not_getting_a_boolean_value(mixed $value): void
     {
        // ACT & ASSERT
@@ -97,8 +86,7 @@ class BooleanAssertionTest extends TestCase
     }
 
     #[Test]
-    #[TestWith([true])]
-    #[TestWith([false])]
+    #[DataProvider('provideBooleanValues')]
     public function fails_when_not_expecting_a_boolean_value_and_getting_boolean_value(bool $value): void
     {
        // ASSERT
@@ -106,5 +94,25 @@ class BooleanAssertionTest extends TestCase
 
        // ACT
        Expect($value)->not()->toBeABoolean();
+    }
+
+    public static function provideBooleanValues(): array
+    {
+        return [
+            [true],
+            [false],
+        ];
+    }
+
+    public static function provideNonBooleanValues(): array
+    {
+       return [
+           [1],
+           [0],
+           ['true'],
+           ['false'],
+           [null],
+           [[]],
+       ];
     }
 }
