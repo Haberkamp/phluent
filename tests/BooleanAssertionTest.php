@@ -3,7 +3,9 @@
 namespace Phluent\Tests;
 
 use PHPUnit\Framework\AssertionFailedError;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
+use PHPUnit\Framework\Attributes\TestWith;
 use PHPUnit\Framework\TestCase;
 use function Phluent\Expect;
 
@@ -55,5 +57,14 @@ class BooleanAssertionTest extends TestCase
 
       // ACT
       Expect($value)->toBeFalse();
+    }
+
+    #[Test]
+    #[TestWith([true])]
+    #[TestWith([false])]
+    public function passes_when_expecting_a_boolean_value_and_getting_a_boolean_value(bool $value): void
+    {
+        // ACT & ASSERT
+        Expect($value)->toBeABoolean();
     }
 }

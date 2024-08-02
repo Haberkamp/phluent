@@ -18,4 +18,9 @@ class FluentAssert extends Assert {
     {
         self::assertFalse($this->value);
     }
+
+    public function toBeABoolean(): void
+    {
+        self::assertIsBool($this->value);
+    }
 }
