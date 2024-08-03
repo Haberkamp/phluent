@@ -53,6 +53,52 @@ class StringAssertionTest extends TestCase
         Expect($value)->not()->toBeEmpty();
     }
 
+    #[Test]
+    public function passes_when_expecting_string_to_have_one_character_and_it_actually_has_only_one_character(): void
+    {
+        // ARRANGE
+        $value = 'a';
+
+        // ACT & ASSERT
+        Expect($value)->toHaveALengthOf(1);
+    }
+
+    #[Test]
+    public function fails_when_expecting_string_to_have_one_character_but_it_has_two_characters(): void
+    {
+        // ARRANGE
+        $value = 'ab';
+
+        // ASSERT
+        $this->expectException(AssertionFailedError::class);
+
+        // ACT
+        Expect($value)->toHaveALengthOf(1);
+    }
+
+    #[Test]
+    public function passes_when_expecting_string_not_to_have_exactly_one_character_and_string_has_two_characters(): void
+    {
+        // ARRANGE
+        $value = 'ab';
+
+        // ACT & ASSERT
+        Expect($value)->not()->toHaveALengthOf(1);
+    }
+
+    #[Test]
+    public function fails_when_expecting_string_not_to_have_exactly_one_character_but_it_has_one_character(): void
+    {
+        // ARRANGE
+        $value = 'a';
+
+        // ASSERT
+        $this->expectException(AssertionFailedError::class);
+
+        // ACT
+        Expect($value)->not()->toHaveALengthOf(1);
+    }
+
     public static function provideNonEmptyStrings(): array
     {
         return [
