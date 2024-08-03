@@ -72,6 +72,16 @@ class FluentAssert extends Assert
         self::assertEmpty($this->value);
     }
 
+    public function toBeAString(): void
+    {
+        if ($this->inverse) {
+            self::assertIsNotString($this->value);
+            return;
+        }
+
+        self::assertIsString($this->value);
+    }
+
     public function not(): static
     {
         $this->inverse = true;
