@@ -143,6 +143,29 @@ class BooleanAssertionTest extends TestCase
         Expect($value)->not()->toBeABoolean();
     }
 
+    #[Test]
+    public function passes_when_the_actual_string_has_the_exact_same_value_as_the_expected_string(): void
+    {
+        // ARRANGE
+        $value = 'Hello, world!';
+
+        // ACT & ASSERT
+        Expect($value)->toBe('Hello, world!');
+    }
+
+    #[Test]
+    public function fails_when_the_actual_string_does_not_have_the_exact_same_value_as_the_expected_string(): void
+    {
+        // ARRANGE
+        $value = 'Hello, world!';
+
+        // ASSERT
+        $this->expectException(AssertionFailedError::class);
+
+        // ACT
+        Expect($value)->toBe('Hello, World!');
+    }
+
     public static function provideBooleanValues(): array
     {
         return [
