@@ -6,6 +6,7 @@ use PHPUnit\Framework\AssertionFailedError;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
+
 use function Phluent\Expect;
 
 class NullAssertionTest extends TestCase
@@ -24,32 +25,32 @@ class NullAssertionTest extends TestCase
     #[DataProvider('provideNonNullValues')]
     public function fails_when_expecting_null_and_not_getting_null(mixed $value): void
     {
-       // ASSERT
-       $this->expectException(AssertionFailedError::class);
+        // ASSERT
+        $this->expectException(AssertionFailedError::class);
 
-       // ACT
-       Expect($value)->toBeNull();
+        // ACT
+        Expect($value)->toBeNull();
     }
 
     #[Test]
     #[DataProvider('provideNonNullValues')]
     public function passes_when_not_expecting_null_and_not_getting_null(mixed $value): void
     {
-       // ACT & ASSERT
-       Expect($value)->not()->toBeNull();
+        // ACT & ASSERT
+        Expect($value)->not()->toBeNull();
     }
 
     #[Test]
     public function fails_when_not_expecting_null_and_getting_null(): void
     {
-       // ARRANGE
-       $value = null;
+        // ARRANGE
+        $value = null;
 
-       // ASSERT
-       $this->expectException(AssertionFailedError::class);
+        // ASSERT
+        $this->expectException(AssertionFailedError::class);
 
-       // ACT
-       Expect($value)->not()->toBeNull();
+        // ACT
+        Expect($value)->not()->toBeNull();
     }
 
     public static function provideNonNullValues(): array

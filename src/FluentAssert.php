@@ -4,7 +4,8 @@ namespace Phluent;
 
 use PHPUnit\Framework\Assert;
 
-class FluentAssert extends Assert {
+class FluentAssert extends Assert
+{
     private bool $inverse = false;
 
     public function __construct(private readonly mixed $value)

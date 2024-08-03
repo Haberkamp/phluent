@@ -6,4 +6,3 @@ function Expect(mixed $value): FluentAssert
 {
     return new FluentAssert($value);
 }
-
