@@ -102,6 +102,16 @@ class FluentAssert extends Assert
         self::assertStringStartsWith($prefix, $this->value);
     }
 
+    public function toEndWith(string $suffix): void
+    {
+        if ($this->inverse) {
+            self::assertStringEndsNotWith($suffix, $this->value);
+            return;
+        }
+
+        self::assertStringEndsWith($suffix, $this->value);
+    }
+
     public function not(): static
     {
         $this->inverse = true;
