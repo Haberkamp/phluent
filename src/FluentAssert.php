@@ -52,6 +52,26 @@ class FluentAssert extends Assert
         self::assertNull($this->value);
     }
 
+    public function toHaveALengthOf(int $length): void
+    {
+        if ($this->inverse) {
+            self::assertNotSame($length, strlen($this->value));
+            return;
+        }
+
+        self::assertSame($length, strlen($this->value));
+    }
+
+    public function toBeEmpty(): void
+    {
+        if ($this->inverse) {
+            self::assertNotEmpty($this->value);
+            return;
+        }
+
+        self::assertEmpty($this->value);
+    }
+
     public function not(): static
     {
         $this->inverse = true;
