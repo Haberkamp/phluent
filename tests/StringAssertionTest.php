@@ -54,6 +54,29 @@ class StringAssertionTest extends TestCase
     }
 
     #[Test]
+    public function passes_when_expecting_the_actual_string_not_to_be_the_same_as_the_expected_string(): void
+    {
+        // ARRANGE
+        $value = 'Hello, world!';
+
+        // ACT & ASSERT
+        Expect($value)->not()->toBe('Hello, world');
+    }
+
+    #[Test]
+    public function fails_when_expecting_the_actual_value_to_be_different_from_the_expected_value_but_both_values_are_the_same(): void
+    {
+        // ARRANGE
+        $value = 'Hello, world!';
+
+        // ASSERT
+        $this->expectException(AssertionFailedError::class);
+
+        // ACT
+        Expect($value)->not()->toBe('Hello, world!');
+    }
+
+    #[Test]
     public function passes_when_expecting_an_empty_string_and_getting_an_empty_string(): void
     {
         // ARRANGE
