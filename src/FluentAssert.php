@@ -92,6 +92,16 @@ class FluentAssert extends Assert
         self::assertSame($string, $this->value);
     }
 
+    public function toStartWith(string $prefix): void
+    {
+        if ($this->inverse) {
+            self::assertStringStartsNotWith($prefix, $this->value);
+            return;
+        }
+
+        self::assertStringStartsWith($prefix, $this->value);
+    }
+
     public function not(): static
     {
         $this->inverse = true;
