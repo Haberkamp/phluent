@@ -1,10 +1,15 @@
 FROM php:8.2-cli
 
+# Rationale: https://github.com/hadolint/hadolint/wiki/DL4006
+SHELL ["/bin/bash", "-eo", "pipefail", "-c"]
+
 # Install system dependencies
-RUN apt-get update && apt-get install -y \
+# hadolint ignore=DL3008
+RUN apt-get update && apt-get install -y --no-install-recommends \
     git \
     unzip \
-    libzip-dev
+    libzip-dev \
+	&& rm -rf /var/lib/apt/lists/*
 
 # Install PHP extensions
 RUN docker-php-ext-install zip
