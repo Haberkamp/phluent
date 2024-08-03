@@ -6,6 +6,7 @@ use PHPUnit\Framework\AssertionFailedError;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
+
 use function Phluent\Expect;
 
 class BooleanAssertionTest extends TestCase
@@ -60,25 +61,25 @@ class BooleanAssertionTest extends TestCase
     #[Test]
     public function passes_when_expecting_false_and_getting_false(): void
     {
-       // ARRANGE
-       $value = false;
+        // ARRANGE
+        $value = false;
 
-       // ACT & ASSERT
-       Expect($value)->toBeFalse();
+        // ACT & ASSERT
+        Expect($value)->toBeFalse();
     }
 
     #[Test]
     public function fails_when_expecting_false_and_getting_true(): void
     {
-      // ARRANGE
-      $value = true;
+        // ARRANGE
+        $value = true;
 
-      // ASSERT
-      // TODO: assert assertion message
-      $this->expectException(AssertionFailedError::class);
+        // ASSERT
+        // TODO: assert assertion message
+        $this->expectException(AssertionFailedError::class);
 
-      // ACT
-      Expect($value)->toBeFalse();
+        // ACT
+        Expect($value)->toBeFalse();
     }
 
     #[Test]
@@ -101,7 +102,7 @@ class BooleanAssertionTest extends TestCase
         $this->expectException(AssertionFailedError::class);
 
         // ACT
-       Expect($value)->not()->toBeFalse();
+        Expect($value)->not()->toBeFalse();
     }
 
     #[Test]
@@ -127,19 +128,19 @@ class BooleanAssertionTest extends TestCase
     #[DataProvider('provideNonBooleanValues')]
     public function passes_when_not_expecting_a_boolean_value_and_not_getting_a_boolean_value(mixed $value): void
     {
-       // ACT & ASSERT
-       Expect($value)->not()->toBeABoolean();
+        // ACT & ASSERT
+        Expect($value)->not()->toBeABoolean();
     }
 
     #[Test]
     #[DataProvider('provideBooleanValues')]
     public function fails_when_not_expecting_a_boolean_value_and_getting_boolean_value(bool $value): void
     {
-       // ASSERT
-       $this->expectException(AssertionFailedError::class);
+        // ASSERT
+        $this->expectException(AssertionFailedError::class);
 
-       // ACT
-       Expect($value)->not()->toBeABoolean();
+        // ACT
+        Expect($value)->not()->toBeABoolean();
     }
 
     public static function provideBooleanValues(): array
@@ -152,13 +153,13 @@ class BooleanAssertionTest extends TestCase
 
     public static function provideNonBooleanValues(): array
     {
-       return [
-           [1],
-           [0],
-           ['true'],
-           ['false'],
-           [null],
-           [[]],
-       ];
+        return [
+            [1],
+            [0],
+            ['true'],
+            ['false'],
+            [null],
+            [[]],
+        ];
     }
 }
