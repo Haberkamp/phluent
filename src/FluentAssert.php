@@ -112,6 +112,16 @@ class FluentAssert extends Assert
         self::assertStringEndsWith($suffix, $this->value);
     }
 
+    public function toContain(string $substring): void
+    {
+        if ($this->inverse) {
+            self::assertStringNotContainsString($substring, $this->value);
+            return;
+        }
+
+        self::assertStringContainsString($substring, $this->value);
+    }
+
     public function not(): static
     {
         $this->inverse = true;
