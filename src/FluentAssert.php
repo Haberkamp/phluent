@@ -122,6 +122,16 @@ class FluentAssert extends Assert
         self::assertStringContainsString($substring, $this->value);
     }
 
+    public function toBeAFloat(): void
+    {
+        if ($this->inverse) {
+            self::assertIsNotFloat($this->value);
+            return;
+        }
+
+        self::assertIsFloat($this->value);
+    }
+
     public function not(): static
     {
         $this->inverse = true;
