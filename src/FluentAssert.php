@@ -132,6 +132,16 @@ class FluentAssert extends Assert
         self::assertIsFloat($this->value);
     }
 
+    public function toBeAnInteger(): void
+    {
+        if ($this->inverse) {
+            self::assertIsNotInt($this->value);
+            return;
+        }
+
+        self::assertIsInt($this->value);
+    }
+
     public function not(): static
     {
         $this->inverse = true;
