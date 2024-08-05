@@ -77,6 +77,50 @@ class IntegerAssertionTest extends TestCase
     }
 
     #[Test]
+    public function passes_when_expecting_value_to_be_between_two_numbers_and_it_is(): void
+    {
+        // ARRANGE
+        $value = 5;
+
+        // ACT & ASSERT
+        Expect($value)->toBeInBetween(1, 10);
+    }
+
+    #[Test]
+    #[TestWith([-2])]
+    #[TestWith([6])]
+    public function fails_when_expecting_value_to_be_between_two_numbers_and_it_is_not(int $value): void
+    {
+        // ASSERT
+        $this->expectException(AssertionFailedError::class);
+
+        // ACT
+        Expect($value)->toBeInBetween(-1, 5);
+    }
+
+    #[Test]
+    #[TestWith([-5])]
+    #[TestWith([10])]
+    public function passes_when_expecting_value_not_be_be_in_between_two_numbers_and_it_is_not(int $value): void
+    {
+        // ACT & ASSERT
+        Expect($value)->not()->toBeInBetween(-4, 9);
+    }
+
+    #[Test]
+    public function fails_when_expecting_value_not_to_be_in_between_to_numbers_but_it_is(): void
+    {
+        // ARRANGE
+        $value = 5;
+
+        // ASSERT
+        $this->expectException(AssertionFailedError::class);
+
+        // ACT
+        Expect($value)->not()->toBeInBetween(4, 6);
+    }
+
+    #[Test]
     #[TestWith([0])]
     #[TestWith([1])]
     public function passes_when_expecting_value_not_to_be_negative_and_it_is(int $value): void
