@@ -77,6 +77,28 @@ class IntegerAssertionTest extends TestCase
     }
 
     #[Test]
+    #[TestWith([0])]
+    #[TestWith([1])]
+    public function passes_when_expecting_value_not_to_be_negative_and_it_is(int $value): void
+    {
+        // ACT & ASSERT
+        Expect($value)->not()->toBeNegative();
+    }
+
+    #[Test]
+    public function fails_when_expecting_value_not_to_be_negative_but_it_is(): void
+    {
+        // ARRANGE
+        $value = -1;
+
+        // ASSERT
+        $this->expectException(AssertionFailedError::class);
+
+        // ACT
+        Expect($value)->not()->toBeNegative();
+    }
+
+    #[Test]
     public function passes_when_expecting_value_to_be_positive_and_it_is(): void
     {
         // ARRANGE
