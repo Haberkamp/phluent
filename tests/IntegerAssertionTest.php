@@ -142,6 +142,52 @@ class IntegerAssertionTest extends TestCase
         Expect($value)->not()->toBePositive();
     }
 
+    #[Test]
+    public function passes_when_expecting_the_actual_value_to_be_greater_than_the_expected_value_and_it_is(): void
+    {
+        // ARRANGE
+        $value = 5;
+
+        // ACT & ASSERT
+        Expect($value)->toBeGreaterThan(4);
+    }
+
+    #[Test]
+    public function fails_when_expecting_actual_value_to_be_greater_than_expected_value_but_it_is_not(): void
+    {
+        // ARRANGE
+        $value = 3;
+
+        // ASSERT
+        $this->expectException(AssertionFailedError::class);
+
+        // ACT
+        Expect($value)->toBeGreaterThan(7);
+    }
+
+    #[Test]
+    public function passes_when_expecting_actual_value_not_to_be_greater_than_expected_value_and_it_is_not(): void
+    {
+        // ARRANGE
+        $value = 4;
+
+        // ACT & ASSERT
+        Expect($value)->not()->toBeGreaterThan(5);
+    }
+
+    #[Test]
+    public function fails_when_expecting_actual_value_not_to_be_greater_than_expected_value_but_it_is(): void
+    {
+        // ARRANGE
+        $value = 8;
+
+        // ASSERT
+        $this->expectException(AssertionFailedError::class);
+
+        // ACT
+        Expect($value)->not()->toBeGreaterThan(3);
+    }
+
     public static function provideNonIntegerValues(): array
     {
         return [
