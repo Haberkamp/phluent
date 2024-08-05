@@ -76,6 +76,50 @@ class IntegerAssertionTest extends TestCase
         Expect($value)->toBeNegative();
     }
 
+    #[Test]
+    public function passes_when_expecting_value_to_be_positive_and_it_is(): void
+    {
+        // ARRANGE
+        $value = 1;
+
+        // ACT & ASSERT
+        Expect($value)->toBePositive();
+    }
+
+    #[Test]
+    #[TestWith([0])]
+    #[TestWith([-1])]
+    public function fails_when_expecting_value_to_be_positive_but_it_is_not(mixed $value): void
+    {
+        // ASSERT
+        $this->expectException(AssertionFailedError::class);
+
+        // ACT
+        Expect($value)->toBePositive();
+    }
+
+    #[Test]
+    #[TestWith([0])]
+    #[TestWith([-1])]
+    public function passes_when_expecting_value_not_to_be_positive_and_it_is_not(int $value): void
+    {
+        // ACT & ASSERT
+        Expect($value)->not()->toBePositive();
+    }
+
+    #[Test]
+    public function fails_when_expecting_value_not_to_be_positive_but_it_is(): void
+    {
+        // ARRANGE
+        $value = 1;
+
+        // ASSERT
+        $this->expectException(AssertionFailedError::class);
+
+        // ACT
+        Expect($value)->not()->toBePositive();
+    }
+
     public static function provideNonIntegerValues(): array
     {
         return [
