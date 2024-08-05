@@ -142,6 +142,11 @@ class FluentAssert extends Assert
         self::assertIsInt($this->value);
     }
 
+    public function toBeNegative(): void
+    {
+        self::assertLessThan(0, $this->value);
+    }
+
     public function not(): static
     {
         $this->inverse = true;

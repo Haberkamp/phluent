@@ -5,6 +5,7 @@ namespace Phluent\Tests;
 use PHPUnit\Framework\AssertionFailedError;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
+use PHPUnit\Framework\Attributes\TestWith;
 use PHPUnit\Framework\TestCase;
 
 use function Phluent\Expect;
@@ -51,6 +52,28 @@ class IntegerAssertionTest extends TestCase
 
         // ACT
         Expect($value)->not()->toBeAnInteger();
+    }
+
+    #[Test]
+    public function passes_when_expecting_value_to_be_negative_and_it_is(): void
+    {
+        // ARRANGE
+        $value = -1;
+
+        // ACT & ASSERT
+        Expect($value)->toBeNegative();
+    }
+
+    #[Test]
+    #[TestWith([0])]
+    #[TestWith([1])]
+    public function fails_when_expecting_value_to_be_negative_but_it_is_not(int $value): void
+    {
+        // ASSERT
+        $this->expectException(AssertionFailedError::class);
+
+        // ACT
+        Expect($value)->toBeNegative();
     }
 
     public static function provideNonIntegerValues(): array
