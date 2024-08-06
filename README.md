@@ -68,7 +68,10 @@ require dirname(__DIR__) . '/vendor/phluent/phluent/src/Expect.php';
 
 The installation is now complete, and you're all set.
 
-And be sure to specify any other minimum requirements like Python versions or operating systems.
+Requirements:
+
+* PHP 7.4 or higher
+* PHPUnit 9.0 or higher
 
 
 ## 💭 Feedback and Contributing
