@@ -55,11 +55,10 @@ class NumberAssertionTest extends TestCase
     }
 
     #[Test]
-    public function passes_when_expecting_value_to_be_negative_and_it_is(): void
+    #[TestWith([-1])]
+    #[TestWith([-1.1])]
+    public function passes_when_expecting_value_to_be_negative_and_it_is(int|float $value): void
     {
-        // ARRANGE
-        $value = -1;
-
         // ACT & ASSERT
         Expect($value)->toBeNegative();
     }
@@ -67,7 +66,8 @@ class NumberAssertionTest extends TestCase
     #[Test]
     #[TestWith([0])]
     #[TestWith([1])]
-    public function fails_when_expecting_value_to_be_negative_but_it_is_not(int $value): void
+    #[TestWith([1.1])]
+    public function fails_when_expecting_value_to_be_negative_but_it_is_not(int|float $value): void
     {
         // ASSERT
         $this->expectException(AssertionFailedError::class);
@@ -77,19 +77,20 @@ class NumberAssertionTest extends TestCase
     }
 
     #[Test]
-    public function passes_when_expecting_value_to_be_between_two_numbers_and_it_is(): void
+    #[TestWith([5])]
+    #[TestWith([5.8])]
+    public function passes_when_expecting_value_to_be_between_two_numbers_and_it_is(int|float $value): void
     {
-        // ARRANGE
-        $value = 5;
-
         // ACT & ASSERT
         Expect($value)->toBeInBetween(1, 10);
     }
 
     #[Test]
     #[TestWith([-2])]
+    #[TestWith([-2.2])]
     #[TestWith([6])]
-    public function fails_when_expecting_value_to_be_between_two_numbers_and_it_is_not(int $value): void
+    #[TestWith([6.6])]
+    public function fails_when_expecting_value_to_be_between_two_numbers_and_it_is_not(int|float $value): void
     {
         // ASSERT
         $this->expectException(AssertionFailedError::class);
@@ -100,19 +101,20 @@ class NumberAssertionTest extends TestCase
 
     #[Test]
     #[TestWith([-5])]
+    #[TestWith([-5.5])]
     #[TestWith([10])]
-    public function passes_when_expecting_value_not_be_be_in_between_two_numbers_and_it_is_not(int $value): void
+    #[TestWith([10.1])]
+    public function passes_when_expecting_value_not_be_be_in_between_two_numbers_and_it_is_not(int|float $value): void
     {
         // ACT & ASSERT
         Expect($value)->not()->toBeInBetween(-4, 9);
     }
 
     #[Test]
-    public function fails_when_expecting_value_not_to_be_in_between_to_numbers_but_it_is(): void
+    #[TestWith([5])]
+    #[TestWith([4.4])]
+    public function fails_when_expecting_value_not_to_be_in_between_to_numbers_but_it_is(int|float $value): void
     {
-        // ARRANGE
-        $value = 5;
-
         // ASSERT
         $this->expectException(AssertionFailedError::class);
 
@@ -123,18 +125,18 @@ class NumberAssertionTest extends TestCase
     #[Test]
     #[TestWith([0])]
     #[TestWith([1])]
-    public function passes_when_expecting_value_not_to_be_negative_and_it_is(int $value): void
+    #[TestWith([1.1])]
+    public function passes_when_expecting_value_not_to_be_negative_and_it_is(int|float $value): void
     {
         // ACT & ASSERT
         Expect($value)->not()->toBeNegative();
     }
 
     #[Test]
-    public function fails_when_expecting_value_not_to_be_negative_but_it_is(): void
+    #[TestWith([-1])]
+    #[TestWith([-1.1])]
+    public function fails_when_expecting_value_not_to_be_negative_but_it_is(int|float $value): void
     {
-        // ARRANGE
-        $value = -1;
-
         // ASSERT
         $this->expectException(AssertionFailedError::class);
 
@@ -143,11 +145,10 @@ class NumberAssertionTest extends TestCase
     }
 
     #[Test]
-    public function passes_when_expecting_value_to_be_positive_and_it_is(): void
+    #[TestWith([1])]
+    #[TestWith([1.1])]
+    public function passes_when_expecting_value_to_be_positive_and_it_is(float|int $value): void
     {
-        // ARRANGE
-        $value = 1;
-
         // ACT & ASSERT
         Expect($value)->toBePositive();
     }
@@ -155,6 +156,7 @@ class NumberAssertionTest extends TestCase
     #[Test]
     #[TestWith([0])]
     #[TestWith([-1])]
+    #[TestWith([-1.1])]
     public function fails_when_expecting_value_to_be_positive_but_it_is_not(mixed $value): void
     {
         // ASSERT
@@ -167,18 +169,18 @@ class NumberAssertionTest extends TestCase
     #[Test]
     #[TestWith([0])]
     #[TestWith([-1])]
-    public function passes_when_expecting_value_not_to_be_positive_and_it_is_not(int $value): void
+    #[TestWith([-1.1])]
+    public function passes_when_expecting_value_not_to_be_positive_and_it_is_not(int|float $value): void
     {
         // ACT & ASSERT
         Expect($value)->not()->toBePositive();
     }
 
     #[Test]
-    public function fails_when_expecting_value_not_to_be_positive_but_it_is(): void
+    #[TestWith([1])]
+    #[TestWith([1.1])]
+    public function fails_when_expecting_value_not_to_be_positive_but_it_is(int|float $value): void
     {
-        // ARRANGE
-        $value = 1;
-
         // ASSERT
         $this->expectException(AssertionFailedError::class);
 
@@ -187,21 +189,19 @@ class NumberAssertionTest extends TestCase
     }
 
     #[Test]
-    public function passes_when_expecting_the_actual_value_to_be_greater_than_the_expected_value_and_it_is(): void
+    #[TestWith([5])]
+    #[TestWith([5.8])]
+    public function passes_when_expecting_the_actual_value_to_be_greater_than_the_expected_value_and_it_is(int|float $value): void
     {
-        // ARRANGE
-        $value = 5;
-
         // ACT & ASSERT
         Expect($value)->toBeGreaterThan(4);
     }
 
     #[Test]
-    public function fails_when_expecting_actual_value_to_be_greater_than_expected_value_but_it_is_not(): void
+    #[TestWith([3])]
+    #[TestWith([3.3])]
+    public function fails_when_expecting_actual_value_to_be_greater_than_expected_value_but_it_is_not(int|float $value): void
     {
-        // ARRANGE
-        $value = 3;
-
         // ASSERT
         $this->expectException(AssertionFailedError::class);
 
@@ -210,21 +210,19 @@ class NumberAssertionTest extends TestCase
     }
 
     #[Test]
-    public function passes_when_expecting_actual_value_not_to_be_greater_than_expected_value_and_it_is_not(): void
+    #[TestWith([4])]
+    #[TestWith([4.4])]
+    public function passes_when_expecting_actual_value_not_to_be_greater_than_expected_value_and_it_is_not(int|float $value): void
     {
-        // ARRANGE
-        $value = 4;
-
         // ACT & ASSERT
         Expect($value)->not()->toBeGreaterThan(5);
     }
 
     #[Test]
-    public function fails_when_expecting_actual_value_not_to_be_greater_than_expected_value_but_it_is(): void
+    #[TestWith([6])]
+    #[TestWith([6.6])]
+    public function fails_when_expecting_actual_value_not_to_be_greater_than_expected_value_but_it_is(int|float $value): void
     {
-        // ARRANGE
-        $value = 8;
-
         // ASSERT
         $this->expectException(AssertionFailedError::class);
 
@@ -233,21 +231,19 @@ class NumberAssertionTest extends TestCase
     }
 
     #[Test]
-    public function passes_when_expecting_the_actual_value_to_be_less_than_the_expected_value_and_it_is(): void
+    #[TestWith([3])]
+    #[TestWith([3.3])]
+    public function passes_when_expecting_the_actual_value_to_be_less_than_the_expected_value_and_it_is(int|float $value): void
     {
-        // ARRANGE
-        $value = 3;
-
         // ACT & ASSERT
         Expect($value)->toBeLessThan(5);
     }
 
     #[Test]
-    public function fails_when_expecting_actual_value_to_be_less_than_expected_value_but_it_is_not(): void
+    #[TestWith([7])]
+    #[TestWith([7.7])]
+    public function fails_when_expecting_actual_value_to_be_less_than_expected_value_but_it_is_not(int|float $value): void
     {
-        // ARRANGE
-        $value = 7;
-
         // ASSERT
         $this->expectException(AssertionFailedError::class);
 
@@ -256,21 +252,19 @@ class NumberAssertionTest extends TestCase
     }
 
     #[Test]
-    public function passes_when_expecting_actual_value_not_to_be_less_than_expected_value_and_it_is_not(): void
+    #[TestWith([5])]
+    #[TestWith([5.5])]
+    public function passes_when_expecting_actual_value_not_to_be_less_than_expected_value_and_it_is_not(int|float $value): void
     {
-        // ARRANGE
-        $value = 4;
-
         // ACT & ASSERT
         Expect($value)->not()->toBeLessThan(3);
     }
 
     #[Test]
-    public function fails_when_expecting_actual_value_not_to_be_less_than_expected_value_but_it_is(): void
+    #[TestWith([2])]
+    #[TestWith([2.2])]
+    public function fails_when_expecting_actual_value_not_to_be_less_than_expected_value_but_it_is(int|float $value): void
     {
-        // ARRANGE
-        $value = 2;
-
         // ASSERT
         $this->expectException(AssertionFailedError::class);
 
