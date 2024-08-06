@@ -82,7 +82,7 @@ class FluentAssert extends Assert
         self::assertIsString($this->value);
     }
 
-    public function toBe(string $string): void
+    public function toBe(mixed $string): void
     {
         if ($this->inverse) {
             self::assertNotSame($string, $this->value);
