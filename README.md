@@ -73,9 +73,9 @@ And be sure to specify any other minimum requirements like Python versions or op
 
 ## 💭 Feedback and Contributing
 
-Add a link to the Discussions tab in your repo and invite users to open issues for bugs/feature requests.
+Thank you for taking an interest in contributing to this project. Feel free to open an [issue](https://github.com/Haberkamp/phluent/issues/new)
+or a pull request if you have any suggestions or improvements.
 
-This is also a great place to invite others to contribute in any ways that make sense for your project. Point people to your DEVELOPMENT and/or CONTRIBUTING guides if you have them.
 
 ## 🏅 Thank you
 
