@@ -1,6 +1,6 @@
 {
     "name": "phluent/phluent",
-    "description": "This is an example project to show how to create a composer package with PHPUnit tests",
+    "description": "A fluent assertion library for PHPUnit. Make your tests read the same way you speak.",
     "version": "0.1.1",
     "type": "library",
     "license": "MIT",
