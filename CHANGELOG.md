@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.2.0](https://github.com/Haberkamp/phluent/compare/v0.1.2...v0.2.0) (2024-08-07)
+
+
+### Features
+
+* add toBeGreaterThanOrEqual() assertion ([707f031](https://github.com/Haberkamp/phluent/commit/707f031b1e0393203168ecad71a6593bb341c641))
+* add toBeLessOrEqualThan() assertion ([f8082bc](https://github.com/Haberkamp/phluent/commit/f8082bcf909b9d96120765c8baa2f7d20709c9f1))
+
 ## [0.1.2](https://github.com/Haberkamp/phluent/compare/v0.1.1...v0.1.2) (2024-08-07)
 
 
