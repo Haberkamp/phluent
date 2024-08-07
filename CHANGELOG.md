@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.1](https://github.com/Haberkamp/phluent/compare/v0.1.0...v0.1.1) (2024-08-07)
+
+
+### Miscellaneous Chores
+
+* update package version to 0.1.0 ([021a0ec](https://github.com/Haberkamp/phluent/commit/021a0ec29ba379cd58cc63a8d6eedb530a7c2f77))
+
 ## [0.1.0](https://github.com/Haberkamp/phluent/compare/v0.0.2...v0.1.0) (2024-08-07)
 
 
