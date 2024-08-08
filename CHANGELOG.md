@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.2.1](https://github.com/Haberkamp/phluent/compare/v0.2.0...v0.2.1) (2024-08-08)
+
+
+### Bug Fixes
+
+* allow floats for toBeGreater than assertion ([0a3dfd7](https://github.com/Haberkamp/phluent/commit/0a3dfd76761af0dc454f9925a26c44c3e4c57d23))
+* allow floats for toBeLess than assertion parameter ([fd851f5](https://github.com/Haberkamp/phluent/commit/fd851f5a064b3623f766e17c80ac7072e5b5924c))
+* make toBeInBetween assertion compatible with floats ([ba6979a](https://github.com/Haberkamp/phluent/commit/ba6979a384ccbdf2a01ac89b4f77a4c1370295e7))
+
 ## [0.2.0](https://github.com/Haberkamp/phluent/compare/v0.1.2...v0.2.0) (2024-08-07)
 
 
