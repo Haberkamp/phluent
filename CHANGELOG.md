@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.3.0](https://github.com/Haberkamp/phluent/compare/v0.2.1...v0.3.0) (2024-08-09)
+
+
+### Features
+
+* add toContainAnyOf assertion ([1d449e3](https://github.com/Haberkamp/phluent/commit/1d449e326b604937a33939e684023d17ef87ff52))
+* addToBeAnArray assertion ([baef895](https://github.com/Haberkamp/phluent/commit/baef8959d8ea4fb0a0eb51e4c447e5beb50dad24))
+* make toContain assertion compatible with arrays ([433b0be](https://github.com/Haberkamp/phluent/commit/433b0becc22142ef5b46029f407251eccec984eb))
+* make toHaveALengthOf assertion compatible with arrays ([64748e3](https://github.com/Haberkamp/phluent/commit/64748e370a00bd6af2c55d6546209ed4ade77e79))
+
 ## [0.2.1](https://github.com/Haberkamp/phluent/compare/v0.2.0...v0.2.1) (2024-08-08)
 
 
