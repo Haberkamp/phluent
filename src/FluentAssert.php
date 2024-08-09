@@ -3,6 +3,7 @@
 namespace Phluent;
 
 use PHPUnit\Framework\Assert;
+use PHPUnit\Framework\AssertionFailedError;
 
 class FluentAssert extends Assert
 {
@@ -253,6 +254,32 @@ class FluentAssert extends Assert
         }
 
         self::assertIsArray($this->value);
+    }
+
+    public function toContainAnyOf(array $items): void
+    {
+        $containsAtLeastOne = false;
+
+        foreach ($items as $item) {
+            try {
+                self::assertContains($item, $this->value);
+
+                $containsAtLeastOne = true;
+            } catch (AssertionFailedError $error) {
+            }
+        }
+
+        if ($this->inverse) {
+            if ($containsAtLeastOne) {
+                throw new AssertionFailedError('Failed asserting that the array does not contain any of the expected values.');
+            }
+
+            return;
+        }
+
+        if (!$containsAtLeastOne) {
+            throw new AssertionFailedError('Failed asserting that the array contains any of the expected values.');
+        }
     }
 
     public function not(): static
