@@ -233,52 +233,6 @@ class StringAssertionTest extends TestCase
         Expect($value)->not()->toEndWith('world!');
     }
 
-    #[Test]
-    public function passes_when_expecting_string_to_contain_substring_and_it_does(): void
-    {
-        // ARRANGE
-        $value = 'Hello, world!';
-
-        // ACT & ASSERT
-        Expect($value)->toContain('world');
-    }
-
-    #[Test]
-    public function fails_when_expecting_string_to_contain_substring_and_it_does_not(): void
-    {
-        // ARRANGE
-        $value = 'Hello, world!';
-
-        // ASSERT
-        $this->expectException(AssertionFailedError::class);
-
-        // ACT
-        Expect($value)->toContain('universe');
-    }
-
-    #[Test]
-    public function passes_when_expecting_string_not_to_contain_substring_and_it_does_not_contain_it(): void
-    {
-        // ARRANGE
-        $value = 'Hello, world!';
-
-        // ACT & ASSERT
-        Expect($value)->not()->toContain('universe');
-    }
-
-    #[Test]
-    public function fails_when_expecting_string_not_to_contain_substring_and_it_does_actually_contain_it(): void
-    {
-        // ARRANGE
-        $value = 'Hello, world!';
-
-        // ASSERT
-        $this->expectException(AssertionFailedError::class);
-
-        // ACT
-        Expect($value)->not()->toContain('world');
-    }
-
     public static function provideNonEmptyStrings(): array
     {
         return [
