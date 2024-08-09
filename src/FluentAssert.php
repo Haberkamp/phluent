@@ -55,7 +55,17 @@ class FluentAssert extends Assert
     public function toHaveALengthOf(int $length): void
     {
         if ($this->inverse) {
+            if (is_array($this->value)) {
+                self::assertNotCount($length, $this->value);
+                return;
+            }
+
             self::assertNotSame($length, strlen($this->value));
+            return;
+        }
+
+        if (is_array($this->value)) {
+            self::assertCount($length, $this->value);
             return;
         }
 
