@@ -122,14 +122,24 @@ class FluentAssert extends Assert
         self::assertStringEndsWith($suffix, $this->value);
     }
 
-    public function toContain(string $substring): void
+    public function toContain(mixed $item): void
     {
         if ($this->inverse) {
-            self::assertStringNotContainsString($substring, $this->value);
+            if (is_array($this->value)) {
+                self::assertNotContains($item, $this->value);
+                return;
+            }
+
+            self::assertStringNotContainsString($item, $this->value);
             return;
         }
 
-        self::assertStringContainsString($substring, $this->value);
+        if (is_array($this->value)) {
+            self::assertContains($item, $this->value);
+            return;
+        }
+
+        self::assertStringContainsString($item, $this->value);
     }
 
     public function toBeAFloat(): void
