@@ -245,6 +245,16 @@ class FluentAssert extends Assert
         self::assertGreaterThanOrEqual($baseline, $this->value);
     }
 
+    public function toBeAnArray(): void
+    {
+        if ($this->inverse) {
+            self::assertIsNotArray($this->value);
+            return;
+        }
+
+        self::assertIsArray($this->value);
+    }
+
     public function not(): static
     {
         $this->inverse = true;
