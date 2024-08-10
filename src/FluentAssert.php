@@ -282,6 +282,31 @@ class FluentAssert extends Assert
         }
     }
 
+    public function toContainAllOf(array $items): void
+    {
+        $containsAll = true;
+
+        foreach ($items as $item) {
+            try {
+                self::assertContains($item, $this->value);
+            } catch (AssertionFailedError $error) {
+                $containsAll = false;
+            }
+        }
+
+        if ($this->inverse) {
+            if ($containsAll) {
+                throw new AssertionFailedError('Failed asserting that the array does not contain all of the expected values.');
+            }
+
+            return;
+        }
+
+        if (!$containsAll) {
+            throw new AssertionFailedError('Failed asserting that the array contains all of the expected values.');
+        }
+    }
+
     public function not(): static
     {
         $this->inverse = true;
