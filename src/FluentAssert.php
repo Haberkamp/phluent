@@ -354,12 +354,16 @@ class FluentAssert extends Assert
      */
     public function toBeInstanceOf(string $class): void
     {
-        if ($this->inverse) {
-            self::assertNotInstanceOf($class, $this->value);
-            return;
+        $isInstanceOfExpectedClass = $this->value instanceof $class;
+        if ($this->inverse && $isInstanceOfExpectedClass) {
+            self::fail('Expected ' . get_class($this->value) . ' not to be an instance of ' . $class . ', but it is.');
         }
 
-        self::assertInstanceOf($class, $this->value);
+        if (!$this->inverse && !$isInstanceOfExpectedClass) {
+            self::fail('Expected ' . get_class($this->value) . ' to be an instance of ' . $class . ', but it\'s not.');
+        }
+
+        self::succeed();
     }
 
     /**
