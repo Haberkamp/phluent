@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.1](https://github.com/Haberkamp/phluent/compare/v0.4.0...v0.4.1) (2024-08-11)
+
+
+### Bug Fixes
+
+* improve assertion message for toThrow assertion ([48a9479](https://github.com/Haberkamp/phluent/commit/48a9479d947e13f0f7624413964bbc3248cf7831))
+
 ## [0.4.0](https://github.com/Haberkamp/phluent/compare/v0.3.0...v0.4.0) (2024-08-11)
 
 
