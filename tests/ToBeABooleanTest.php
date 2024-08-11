@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
 
 use function Phluent\Expect;
 
-class BooleanAssertionTest extends TestCase
+class ToBeABooleanTest extends TestCase
 {
     #[Test]
     #[DataProvider('provideBooleanValues')]
