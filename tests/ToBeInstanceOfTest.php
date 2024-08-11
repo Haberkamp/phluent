@@ -28,6 +28,7 @@ class ToBeInstanceOfTest extends TestCase
 
         // ASSERT
         $this->expectException(AssertionFailedError::class);
+        $this->expectExceptionMessage('Expected stdClass to be an instance of DateTime, but it\'s not.');
 
         // ACT
         Expect($value)->toBeInstanceOf(\DateTime::class);
@@ -51,6 +52,7 @@ class ToBeInstanceOfTest extends TestCase
 
         // ASSERT
         $this->expectException(AssertionFailedError::class);
+        $this->expectExceptionMessage('Expected stdClass not to be an instance of stdClass, but it is.');
 
         // ACT
         Expect($value)->not()->toBeInstanceOf(\stdClass::class);
