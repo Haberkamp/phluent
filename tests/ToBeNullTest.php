@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
 
 use function Phluent\Expect;
 
-class NullAssertionTest extends TestCase
+class ToBeNullTest extends TestCase
 {
     #[Test]
     public function passes_when_expecting_null_and_getting_null(): void
