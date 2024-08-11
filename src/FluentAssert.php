@@ -72,11 +72,19 @@ class FluentAssert extends Assert
     public function toBeNull(): void
     {
         if ($this->inverse) {
-            self::assertNotNull($this->value);
+            if (is_null($this->value)) {
+                self::fail('Expected value not to be null, got null.');
+            }
+
+            self::succeed();
             return;
         }
 
-        self::assertNull($this->value);
+        if (!is_null($this->value)) {
+            self::fail('Expected value to be null, got ' . Exporter::export($this->value) . '.');
+        }
+
+        self::succeed();
     }
 
     public function toHaveALengthOf(int $length): void
