@@ -327,23 +327,46 @@ class FluentAssert extends Assert
     public function toThrow(?string $class = null): void
     {
         $errorWasThrown = false;
+        $correctErrorWasThrown = false;
 
         try {
             $this->value->__invoke();
         } catch (Throwable $error) {
+            $errorWasThrown = true;
+
             if ($class !== null) {
-                $errorWasThrown = $error instanceof $class;
-            } else {
-                $errorWasThrown = true;
+                $correctErrorWasThrown = $error instanceof $class;
             }
         }
 
         if ($this->inverse) {
-            self::assertFalse($errorWasThrown);
+            if ($errorWasThrown && $class !== null && !$correctErrorWasThrown) {
+                self::succeed();
+                return;
+            }
+
+            if ($errorWasThrown && isset($error) && $error instanceof Throwable) {
+                self::fail('Expected no exception to be thrown, ' . $error::class . ' was thrown.');
+            }
+
+            self::succeed();
             return;
         }
 
-        self::assertTrue($errorWasThrown);
+        if (!$errorWasThrown) {
+            self::fail('Expected an exception to be thrown, but no exception was thrown.');
+        }
+
+        if ($class !== null && isset($error) && !$correctErrorWasThrown) {
+            self::fail('Expected ' . $class . ' to be thrown, but ' . $error::class . ' was thrown.');
+        }
+
+        self::succeed();
+    }
+
+    private function succeed(): void
+    {
+        self::assertTrue(true);
     }
 
     public function not(): static

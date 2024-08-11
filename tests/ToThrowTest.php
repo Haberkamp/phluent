@@ -28,6 +28,7 @@ class ToThrowTest extends TestCase
 
         // ASSERT
         $this->expectException(AssertionFailedError::class);
+        $this->expectExceptionMessage('Expected an exception to be thrown, but no exception was thrown.');
 
         // ACT
         Expect($callback)->toThrow();
@@ -51,6 +52,7 @@ class ToThrowTest extends TestCase
 
         // ASSERT
         $this->expectException(AssertionFailedError::class);
+        $this->expectExceptionMessage('Expected no exception to be thrown, Exception was thrown.');
 
         // ACT
         Expect($callback)->not()->toThrow();
@@ -74,6 +76,7 @@ class ToThrowTest extends TestCase
 
         // ASSERT
         $this->expectException(AssertionFailedError::class);
+        $this->expectExceptionMessage('Expected InvalidArgumentException to be thrown, but RuntimeException was thrown.');
 
         // ACT
         Expect($callback)->toThrow(\InvalidArgumentException::class);
@@ -97,6 +100,7 @@ class ToThrowTest extends TestCase
 
         // ASSERT
         $this->expectException(AssertionFailedError::class);
+        $this->expectExceptionMessage('Expected no exception to be thrown, InvalidArgumentException was thrown.');
 
         // ACT
         Expect($callback)->not()->toThrow(\InvalidArgumentException::class);
