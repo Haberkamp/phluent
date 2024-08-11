@@ -4,6 +4,7 @@ namespace Phluent;
 
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\AssertionFailedError;
+use Throwable;
 
 class FluentAssert extends Assert
 {
@@ -315,6 +316,31 @@ class FluentAssert extends Assert
         }
 
         self::assertInstanceOf($class, $this->value);
+    }
+
+    /**
+     * @param class-string<Throwable>|null $class
+     */
+    public function toThrow(?string $class = null): void
+    {
+        $errorWasThrown = false;
+
+        try {
+            $this->value->__invoke();
+        } catch (Throwable $error) {
+            if ($class !== null) {
+                $errorWasThrown = $error instanceof $class;
+            } else {
+                $errorWasThrown = true;
+            }
+        }
+
+        if ($this->inverse) {
+            self::assertFalse($errorWasThrown);
+            return;
+        }
+
+        self::assertTrue($errorWasThrown);
     }
 
     public function not(): static
