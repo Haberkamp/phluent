@@ -525,6 +525,14 @@ class FluentAssert extends Assert
         self::assertTrue(true);
     }
 
+    /**
+     * @param class-string<Throwable>|null $class
+     */
+    public function toHaveThrown(?string $class = null): void
+    {
+        $this->toThrow($class);
+    }
+
     public function not(): static
     {
         $this->inverse = true;
