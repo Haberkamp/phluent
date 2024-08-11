@@ -308,6 +308,9 @@ class FluentAssert extends Assert
         }
     }
 
+    /**
+     * @param class-string<Throwable> $class
+     */
     public function toBeInstanceOf(string $class): void
     {
         if ($this->inverse) {
