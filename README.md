@@ -94,6 +94,7 @@ Open the file and add the following code:
 
 ```php
 require dirname(__DIR__) . '/vendor/phluent/phluent/src/Expect.php';
+require dirname(__DIR__) . '/vendor/phluent/phluent/src/Act.php';
 ```
 
 The installation is now complete, and you're all set.

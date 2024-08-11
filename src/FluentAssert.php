@@ -11,8 +11,22 @@ class FluentAssert extends Assert
 {
     private bool $inverse = false;
 
-    public function __construct(private readonly mixed $value)
+    private readonly mixed $value;
+
+    private ?Throwable $exception = null;
+
+    public function __construct(mixed $value)
     {
+        if (!Result::isResult($value)) {
+            $this->value = $value;
+
+            return;
+        }
+
+        $value->match(
+            some: fn ($value) => $this->value = $value,
+            error: fn ($exception) => $this->exception = $exception
+        );
     }
 
     public function toBeTrue(): void
@@ -485,15 +499,20 @@ class FluentAssert extends Assert
         $errorWasThrown = false;
         $correctErrorWasThrown = false;
 
-        try {
-            $this->value->__invoke();
-        } catch (Throwable $error) {
+        if ($this->exception) {
             $errorWasThrown = true;
+        } else {
+            try {
+                $this->value->__invoke();
+            } catch (Throwable $error) {
+                $errorWasThrown = true;
 
-            if ($class !== null) {
-                $correctErrorWasThrown = $error instanceof $class;
+                if ($class !== null) {
+                    $correctErrorWasThrown = $error instanceof $class;
+                }
             }
         }
+
 
         if ($this->inverse) {
             if ($errorWasThrown && $class !== null && !$correctErrorWasThrown) {
@@ -503,6 +522,10 @@ class FluentAssert extends Assert
 
             if ($errorWasThrown && isset($error) && $error instanceof Throwable) {
                 self::fail('Expected no exception to be thrown, ' . $error::class . ' was thrown.');
+            }
+
+            if ($errorWasThrown && !$correctErrorWasThrown && isset($this->exception)) {
+                self::fail('Expected no exception to be thrown, ' . $this->exception::class . ' was thrown.');
             }
 
             self::succeed();
