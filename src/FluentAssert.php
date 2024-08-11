@@ -91,20 +91,36 @@ class FluentAssert extends Assert
     {
         if ($this->inverse) {
             if (is_array($this->value)) {
-                self::assertNotCount($length, $this->value);
+                if (count($this->value) === $length) {
+                    self::fail('Expected array not to contain ' . $length . ' items(s), but found ' . count($this->value) . ' item(s): ' . Exporter::export($this->value));
+                }
+
+                self::succeed();
                 return;
             }
 
-            self::assertNotSame($length, strlen($this->value));
+            if (strlen($this->value) === $length) {
+                self::fail('Expected string not to contain ' . $length . ' character(s), but found ' . strlen($this->value) . ' character(s): ' . Exporter::export($this->value));
+            }
+
+            self::succeed();
             return;
         }
 
         if (is_array($this->value)) {
-            self::assertCount($length, $this->value);
+            if (count($this->value) !== $length) {
+                self::fail('Expected array to contain ' . $length . ' items(s), but found ' . count($this->value) . ' item(s): ' . Exporter::export($this->value));
+            }
+
+            self::succeed();
             return;
         }
 
-        self::assertSame($length, strlen($this->value));
+        if (strlen($this->value) !== $length) {
+            self::fail('Expected string to contain ' . $length . ' character(s), but found ' . strlen($this->value) . ' character(s): ' . Exporter::export($this->value));
+        }
+
+        self::succeed();
     }
 
     public function toBeEmpty(): void
