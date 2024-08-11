@@ -4,6 +4,7 @@ namespace Phluent;
 
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\AssertionFailedError;
+use PHPUnit\Util\Exporter;
 use Throwable;
 
 class FluentAssert extends Assert
@@ -53,11 +54,19 @@ class FluentAssert extends Assert
     public function toBeABoolean(): void
     {
         if ($this->inverse) {
-            self::assertIsNotBool($this->value);
+            if (is_bool($this->value)) {
+                self::fail('Expected value not to be a boolean, got ' . Exporter::export($this->value) . '.');
+            }
+
+            self::succeed();
             return;
         }
 
-        self::assertIsBool($this->value);
+        if (!is_bool($this->value)) {
+            self::fail('Expected value to be a boolean, got ' . Exporter::export($this->value) . '.');
+        }
+
+        self::succeed();
     }
 
     public function toBeNull(): void
