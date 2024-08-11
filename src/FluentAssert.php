@@ -283,11 +283,19 @@ class FluentAssert extends Assert
     public function toBeAnArray(): void
     {
         if ($this->inverse) {
-            self::assertIsNotArray($this->value);
+            if (is_array($this->value)) {
+                self::fail('Expected value not to be an array, got ' . Exporter::export($this->value) . '.');
+            }
+
+            self::succeed();
             return;
         }
 
-        self::assertIsArray($this->value);
+        if (!is_array($this->value)) {
+            self::fail('Expected value to be an array, got ' . Exporter::export($this->value) . '.');
+        }
+
+        self::succeed();
     }
 
     public function toContainAnyOf(array $items): void
