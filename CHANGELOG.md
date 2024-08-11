@@ -1,5 +1,22 @@
 # Changelog
 
+## [0.4.0](https://github.com/Haberkamp/phluent/compare/v0.3.0...v0.4.0) (2024-08-11)
+
+
+### Features
+
+* add toThrow assertion ([500cc13](https://github.com/Haberkamp/phluent/commit/500cc13dbcebb29f0bc44cd42300aaec5ea5bc48))
+
+
+### Bug Fixes
+
+* update doc-block for toBeInstanceOf assertion ([f9a55d6](https://github.com/Haberkamp/phluent/commit/f9a55d675d7d34c86a51e2e97ab9f4bdef8ee299))
+
+
+### Miscellaneous Chores
+
+* remove gitlab ci file ([bad9051](https://github.com/Haberkamp/phluent/commit/bad9051bb0b24cba8ccdb03f658709bb03db4ba2))
+
 ## [0.3.0](https://github.com/Haberkamp/phluent/compare/v0.2.1...v0.3.0) (2024-08-10)
 
 
