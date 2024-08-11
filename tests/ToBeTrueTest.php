@@ -27,8 +27,8 @@ class ToBeTrueTest extends TestCase
         $value = false;
 
         // ASSERT
-        // TODO: assert assertion message
         $this->expectException(AssertionFailedError::class);
+        $this->expectExceptionMessage("Expected boolean to be true, got false");
 
         // ACT
         Expect($value)->toBeTrue();
@@ -52,6 +52,7 @@ class ToBeTrueTest extends TestCase
 
         // ASSERT
         $this->expectException(AssertionFailedError::class);
+        $this->expectExceptionMessage("Expected boolean to be false, got true.");
 
         // ACT
         Expect($value)->not()->toBeTrue();
