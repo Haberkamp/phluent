@@ -10,7 +10,6 @@ use function Phluent\Expect;
 
 class ToBeFalseTest extends TestCase
 {
-
     #[Test]
     public function passes_when_expecting_false_and_getting_false(): void
     {
@@ -28,8 +27,8 @@ class ToBeFalseTest extends TestCase
         $value = true;
 
         // ASSERT
-        // TODO: assert assertion message
         $this->expectException(AssertionFailedError::class);
+        $this->expectExceptionMessage('Expected boolean to be false, got true.');
 
         // ACT
         Expect($value)->toBeFalse();
@@ -53,6 +52,7 @@ class ToBeFalseTest extends TestCase
 
         // ASSERT
         $this->expectException(AssertionFailedError::class);
+        $this->expectExceptionMessage('Expected boolean to be true, got false.');
 
         // ACT
         Expect($value)->not()->toBeFalse();
