@@ -165,12 +165,17 @@ class FluentAssert extends Assert
 
     public function toEndWith(string $suffix): void
     {
-        if ($this->inverse) {
-            self::assertStringEndsNotWith($suffix, $this->value);
-            return;
+        $containsSuffix = str_ends_with($this->value, $suffix);
+
+        if ($this->inverse && $containsSuffix) {
+            self::fail('Expected string "' . $this->value . '" not to end with "' . $suffix . '", but it does.');
         }
 
-        self::assertStringEndsWith($suffix, $this->value);
+        if (!$this->inverse && !$containsSuffix) {
+            self::fail('Expected string "' . $this->value . '" to end with "' . $suffix . '", but it does not.');
+        }
+
+        self::succeed();
     }
 
     public function toContain(mixed $item): void

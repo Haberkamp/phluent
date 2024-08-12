@@ -10,7 +10,6 @@ use function Phluent\Expect;
 
 class ToEndWithTest extends TestCase
 {
-
     #[Test]
     public function passes_when_expecting_string_to_end_with_suffix_and_it_does(): void
     {
@@ -29,6 +28,7 @@ class ToEndWithTest extends TestCase
 
         // ASSERT
         $this->expectException(AssertionFailedError::class);
+        $this->expectExceptionMessage('Expected string "Hello, world!" to end with "world", but it does not.');
 
         // ACT
         Expect($value)->toEndWith('world');
@@ -52,6 +52,7 @@ class ToEndWithTest extends TestCase
 
         // ASSERT
         $this->expectException(AssertionFailedError::class);
+        $this->expectExceptionMessage('Expected string "Hello, world!" not to end with "world!", but it does.');
 
         // ACT
         Expect($value)->not()->toEndWith('world!');
