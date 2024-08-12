@@ -135,12 +135,17 @@ class FluentAssert extends Assert
 
     public function toBeAString(): void
     {
-        if ($this->inverse) {
-            self::assertIsNotString($this->value);
-            return;
+        $isAString = is_string($this->value);
+
+        if ($this->inverse && $isAString) {
+            self::fail('Expected value not to be a string, got ' . Exporter::export($this->value) . '.');
         }
 
-        self::assertIsString($this->value);
+        if (!$this->inverse && !$isAString) {
+            self::fail('Expected value to be a string, got ' . Exporter::export($this->value) . '.');
+        }
+
+        self::succeed();
     }
 
     public function toBe(mixed $string): void
