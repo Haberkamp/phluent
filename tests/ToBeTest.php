@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
 
 use function Phluent\Expect;
 
-class CommonAssertionTest extends TestCase
+class ToBeTest extends TestCase
 {
     #[Test]
     #[DataProvider('provideEqualValues')]
