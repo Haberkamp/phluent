@@ -145,12 +145,17 @@ class FluentAssert extends Assert
 
     public function toBe(mixed $string): void
     {
-        if ($this->inverse) {
-            self::assertNotSame($string, $this->value);
-            return;
+        $isSame = $this->value === $string;
+
+        if ($this->inverse && $isSame) {
+            self::fail('Expected ' . Exporter::export($this->value) . ' not to be the same as ' . Exporter::export($string) . ', but it is.');
         }
 
-        self::assertSame($string, $this->value);
+        if (!$this->inverse && !$isSame) {
+            self::fail('Expected ' . Exporter::export($this->value) . ' to be the same as ' . Exporter::export($string) . ', but it is not.');
+        }
+
+        self::succeed();
     }
 
     public function toStartWith(string $prefix): void
