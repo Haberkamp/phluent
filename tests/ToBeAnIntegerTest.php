@@ -3,8 +3,8 @@
 namespace Phluent\Tests;
 
 use PHPUnit\Framework\AssertionFailedError;
-use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
+use PHPUnit\Framework\Attributes\TestWith;
 use PHPUnit\Framework\TestCase;
 
 use function Phluent\Expect;
@@ -22,18 +22,30 @@ class ToBeAnIntegerTest extends TestCase
     }
 
     #[Test]
-    #[DataProvider('provideNonIntegerValues')]
-    public function test_fails_when_expecting_an_integer_and_not_getting_one(mixed $value): void
+    #[TestWith([null, 'Expected value to be an integer, got null.'])]
+    #[TestWith([true, 'Expected value to be an integer, got true.'])]
+    #[TestWith([false, 'Expected value to be an integer, got false.'])]
+    #[TestWith(['1', 'Expected value to be an integer, got \'1\'.'])]
+    #[TestWith([1.87, 'Expected value to be an integer, got 1.87.'])]
+    #[TestWith([[], 'Expected value to be an integer, got Array &0 [].'])]
+    public function test_fails_when_expecting_an_integer_and_not_getting_one(mixed $value, string $message): void
     {
         // ASSERT
         $this->expectException(AssertionFailedError::class);
+        $this->expectExceptionMessage($message);
 
         // ACT
         Expect($value)->toBeAnInteger();
     }
 
     #[Test]
-    #[DataProvider('provideNonIntegerValues')]
+    #[TestWith([null])]
+    #[TestWith([true])]
+    #[TestWith([false])]
+    #[TestWith(['1'])]
+    #[TestWith([1.87])]
+    #[TestWith([[]])]
+    #[TestWith([new \stdClass()])]
     public function test_passes_when_not_expecting_an_integer_value_and_not_getting_one(mixed $value): void
     {
         // ACT & ASSERT
@@ -48,21 +60,9 @@ class ToBeAnIntegerTest extends TestCase
 
         // ASSERT
         $this->expectException(AssertionFailedError::class);
+        $this->expectExceptionMessage('Expected value not to be an integer, got 1.');
 
         // ACT
         Expect($value)->not()->toBeAnInteger();
-    }
-
-    public static function provideNonIntegerValues(): array
-    {
-        return [
-            [null],
-            [true],
-            [false],
-            ['1'],
-            [1.87],
-            [[]],
-            [new \stdClass()],
-        ];
     }
 }
