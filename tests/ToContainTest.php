@@ -101,6 +101,7 @@ class ToContainTest extends TestCase
 
         // ASSERT
         $this->expectException(AssertionFailedError::class);
+        $this->expectExceptionMessage("Expected string 'Hello, world!' to contain 'universe', but it does not.");
 
         // ACT
         Expect($value)->toContain('universe');
@@ -124,6 +125,7 @@ class ToContainTest extends TestCase
 
         // ASSERT
         $this->expectException(AssertionFailedError::class);
+        $this->expectExceptionMessage("Expected string 'Hello, world!' not to contain 'world', but it does.");
 
         // ACT
         Expect($value)->not()->toContain('world');

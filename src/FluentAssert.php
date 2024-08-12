@@ -185,7 +185,11 @@ class FluentAssert extends Assert
                 return;
             }
 
-            self::assertStringNotContainsString($item, $this->value);
+            if (str_contains($this->value, $item)) {
+                self::fail('Expected string ' . Exporter::export($this->value) . ' not to contain ' . Exporter::export($item) . ', but it does.');
+            }
+
+            self::succeed();
             return;
         }
 
@@ -198,7 +202,11 @@ class FluentAssert extends Assert
             return;
         }
 
-        self::assertStringContainsString($item, $this->value);
+        if (!str_contains($this->value, $item)) {
+            self::fail('Expected string ' . Exporter::export($this->value) . ' to contain ' . Exporter::export($item) . ', but it does not.');
+        }
+
+        self::succeed();
     }
 
     public function toBeAFloat(): void
