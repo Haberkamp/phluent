@@ -226,12 +226,17 @@ class FluentAssert extends Assert
 
     public function toBeAFloat(): void
     {
-        if ($this->inverse) {
-            self::assertIsNotFloat($this->value);
-            return;
+        $isAFloat = is_float($this->value);
+
+        if ($this->inverse && $isAFloat) {
+            self::fail('Expected ' . Exporter::export($this->value) . ' not to be a float, but it is.');
         }
 
-        self::assertIsFloat($this->value);
+        if (!$this->inverse && !$isAFloat) {
+            self::fail('Expected ' . Exporter::export($this->value) . ' to be a float, but it is not.');
+        }
+
+        self::succeed();
     }
 
     public function toBeAnInteger(): void
