@@ -5,6 +5,7 @@ namespace Phluent\Tests;
 use PHPUnit\Framework\AssertionFailedError;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
+use PHPUnit\Framework\Attributes\TestWith;
 use PHPUnit\Framework\TestCase;
 
 use function Phluent\Expect;
@@ -22,11 +23,17 @@ class ToBeEmptyTest extends TestCase
     }
 
     #[Test]
-    #[DataProvider('provideNonEmptyStrings')]
-    public function fails_when_expecting_an_empty_string_but_getting_a_non_empty_string(string $value): void
+    #[TestWith([' ', 'Expected string to be empty, got \' \'.'])]
+    #[TestWith(["Hello, world!", 'Expected string to be empty, got \'Hello, world!\'.'])]
+    #[TestWith(["\n", "Expected string to be empty, got '\\n\n'."])]
+    #[TestWith(["\x00", 'Expected string to be empty, got Binary String: 0x00.'])]
+    #[TestWith(["\t", 'Expected string to be empty, got \'	\'.'])]
+    #[TestWith(["\r", "Expected string to be empty, got '\\r\n'."])]
+    public function fails_when_expecting_an_empty_string_but_getting_a_non_empty_string(string $value, string $message): void
     {
         // ASSERT
         $this->expectException(AssertionFailedError::class);
+        $this->expectExceptionMessage($message);
 
         // ACT
         Expect($value)->toBeEmpty();
@@ -48,6 +55,7 @@ class ToBeEmptyTest extends TestCase
 
         // ASSERT
         $this->expectException(AssertionFailedError::class);
+        $this->expectExceptionMessage('Expected string not to be empty, but it is.');
 
         // ACT
         Expect($value)->not()->toBeEmpty();
@@ -71,6 +79,9 @@ class ToBeEmptyTest extends TestCase
 
         // ASSERT
         $this->expectException(AssertionFailedError::class);
+        $this->expectExceptionMessage(
+            "Expected array to be empty, counted 3 item(s): Array &0 [\n    0 => 1,\n    1 => 2,\n    2 => 3,\n]"
+        );
 
         // ACT
         Expect($value)->toBeEmpty();
@@ -94,6 +105,7 @@ class ToBeEmptyTest extends TestCase
 
         // ASSERT
         $this->expectException(AssertionFailedError::class);
+        $this->expectExceptionMessage('Expected array not to be empty, but it is.');
 
         // ACT
         Expect($value)->not()->toBeEmpty();
