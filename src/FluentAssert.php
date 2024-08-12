@@ -309,12 +309,17 @@ class FluentAssert extends Assert
 
     public function toBeLessThan(int|float $baseline): void
     {
-        if ($this->inverse) {
-            self::assertGreaterThan($baseline, $this->value);
-            return;
+        $isLessThanBaseline = $this->value < $baseline;
+
+        if ($this->inverse && $isLessThanBaseline) {
+            self::fail('Expected ' . $this->value . ' not to be less than ' . $baseline . ', but it is.');
         }
 
-        self::assertLessThan($baseline, $this->value);
+        if (!$this->inverse && !$isLessThanBaseline) {
+            self::fail('Expected ' . $this->value . ' to be less than ' . $baseline . ', but it\'s not.');
+        }
+
+        self::succeed();
     }
 
     public function toBeLessThanOrEqual(int|float $baseline): void
