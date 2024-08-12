@@ -177,20 +177,36 @@ class FluentAssert extends Assert
     {
         if ($this->inverse) {
             if (is_array($this->value)) {
-                self::assertNotContains($item, $this->value);
+                if (in_array($item, $this->value, true)) {
+                    self::fail('Expected array not to contain ' . Exporter::export($item) . ', but it does: ' . Exporter::export($this->value));
+                }
+
+                self::succeed();
                 return;
             }
 
-            self::assertStringNotContainsString($item, $this->value);
+            if (str_contains($this->value, $item)) {
+                self::fail('Expected string ' . Exporter::export($this->value) . ' not to contain ' . Exporter::export($item) . ', but it does.');
+            }
+
+            self::succeed();
             return;
         }
 
         if (is_array($this->value)) {
-            self::assertContains($item, $this->value);
+            if (!in_array($item, $this->value, true)) {
+                self::fail('Expected array to contain ' . Exporter::export($item) . ', but it does not: ' . Exporter::export($this->value));
+            }
+
+            self::succeed();
             return;
         }
 
-        self::assertStringContainsString($item, $this->value);
+        if (!str_contains($this->value, $item)) {
+            self::fail('Expected string ' . Exporter::export($this->value) . ' to contain ' . Exporter::export($item) . ', but it does not.');
+        }
+
+        self::succeed();
     }
 
     public function toBeAFloat(): void
