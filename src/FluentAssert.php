@@ -177,7 +177,11 @@ class FluentAssert extends Assert
     {
         if ($this->inverse) {
             if (is_array($this->value)) {
-                self::assertNotContains($item, $this->value);
+                if (in_array($item, $this->value, true)) {
+                    self::fail('Expected array not to contain ' . Exporter::export($item) . ', but it does: ' . Exporter::export($this->value));
+                }
+
+                self::succeed();
                 return;
             }
 
@@ -186,7 +190,11 @@ class FluentAssert extends Assert
         }
 
         if (is_array($this->value)) {
-            self::assertContains($item, $this->value);
+            if (!in_array($item, $this->value, true)) {
+                self::fail('Expected array to contain ' . Exporter::export($item) . ', but it does not: ' . Exporter::export($this->value));
+            }
+
+            self::succeed();
             return;
         }
 
