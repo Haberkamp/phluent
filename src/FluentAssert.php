@@ -345,15 +345,18 @@ class FluentAssert extends Assert
 
         if ($this->inverse) {
             if ($containsAtLeastOne) {
-                throw new AssertionFailedError('Failed asserting that the array does not contain any of the expected values.');
+                self::fail('Expected array not to contain any of the expected items ' . Exporter::export($items) . ', but it does: ' . Exporter::export($this->value));
             }
 
+            self::succeed();
             return;
         }
 
         if (!$containsAtLeastOne) {
-            throw new AssertionFailedError('Failed asserting that the array contains any of the expected values.');
+            self::fail('Expected array to contain any of the expected items ' . Exporter::export($items) . ', but it does not: ' . Exporter::export($this->value));
         }
+
+        self::succeed();
     }
 
     public function toContainAllOf(array $items): void
