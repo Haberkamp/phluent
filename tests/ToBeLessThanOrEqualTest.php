@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
 
 use function Phluent\Expect;
 
-class NumberAssertionTest extends TestCase
+class ToBeLessThanOrEqualTest extends TestCase
 {
     #[Test]
     #[TestWith([5, 5])]
