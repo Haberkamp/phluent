@@ -1,5 +1,35 @@
 # Changelog
 
+## [0.4.2](https://github.com/Haberkamp/phluent/compare/v0.4.1...v0.4.2) (2024-08-12)
+
+
+### Bug Fixes
+
+* improve assertion message for toBe assertion ([bdc520e](https://github.com/Haberkamp/phluent/commit/bdc520e4cdbdf6d9e68e3b932571a55f8cc657f2))
+* improve assertion message for toBeABoolean assertion ([7045117](https://github.com/Haberkamp/phluent/commit/70451177fd338e72fbd8f3e2ec6db5729730a3ca))
+* improve assertion message for toBeAFloat assertion ([0b45434](https://github.com/Haberkamp/phluent/commit/0b454340cb196117f750763505a092286d787b8d))
+* improve assertion message for toBeAnArray assertion ([3ab4a15](https://github.com/Haberkamp/phluent/commit/3ab4a150c0da3ff0ea92f5114e16df0221b7ffcf))
+* improve assertion message for toBeAnInstanceOf assertion ([c18e754](https://github.com/Haberkamp/phluent/commit/c18e7540dcb85867654b658359380c8b7ed171b3))
+* improve assertion message for toBeAnInteger assertion ([da88321](https://github.com/Haberkamp/phluent/commit/da883215134dec9149ec23d2a5d7aba3496f12aa))
+* improve assertion message for toBeAString assertion ([b00a0a2](https://github.com/Haberkamp/phluent/commit/b00a0a200b4cc931a33057aaecab0878ffeebeca))
+* improve assertion message for toBeEmpty assertion ([9a3926c](https://github.com/Haberkamp/phluent/commit/9a3926c6b4e367ea2c38174f3df845cfe5873218))
+* improve assertion message for toBeFalse assertion ([95461db](https://github.com/Haberkamp/phluent/commit/95461db27c44fb85206ca1a543e87be58c59bc47))
+* improve assertion message for toBeGreaterThan assertion ([9504538](https://github.com/Haberkamp/phluent/commit/9504538e5080f98fb6b0ae25bbb95713bc683b44))
+* improve assertion message for toBeGreaterThanOrEqual assertion ([9217d4a](https://github.com/Haberkamp/phluent/commit/9217d4a3b37bd8202e9aa90bd93374d91ada26b5))
+* improve assertion message for toBeInBetween assertion ([1e63613](https://github.com/Haberkamp/phluent/commit/1e6361357ebaad6d81be9a6aecc019434f54de1c))
+* improve assertion message for toBeLessThan assertion ([fec4d53](https://github.com/Haberkamp/phluent/commit/fec4d53c87ec4ae9b1095df34669bbf18608e12f))
+* improve assertion message for toBeLessThanOrEqual assertion ([364162e](https://github.com/Haberkamp/phluent/commit/364162e337b04a7e1921126ed1b138b7ad9f7938))
+* improve assertion message for toBeNegative assertion ([5ccd76f](https://github.com/Haberkamp/phluent/commit/5ccd76fce3c8ea5d41c833bdd9a020e97dbeb571))
+* improve assertion message for toBeNull assertion ([ff52e23](https://github.com/Haberkamp/phluent/commit/ff52e23a985e01194bdee8d159cd8ccc91d6acfc))
+* improve assertion message for toBeTrue assertion ([b057761](https://github.com/Haberkamp/phluent/commit/b0577614485ac96a374b03de713918f4b29228dc))
+* improve assertion message for toContain assertion on arrays ([7e978ac](https://github.com/Haberkamp/phluent/commit/7e978ac9c2aad0b30046c023f0f84f2ff1559256))
+* improve assertion message for toContain assertion on strings ([a09d228](https://github.com/Haberkamp/phluent/commit/a09d228f367b6aa7671aaa8b7ac45635c5d605ac))
+* improve assertion message for toContainAnyOf assertion ([fce14c7](https://github.com/Haberkamp/phluent/commit/fce14c7e621576c6a7d7157174669e95af2c9bbb))
+* improve assertion message for toEndWith assertion ([b654d7d](https://github.com/Haberkamp/phluent/commit/b654d7dd3a2d027adae8119121de0560d00b1d1e))
+* improve assertion message for toHaveALengthOf assertion message ([51ac2e9](https://github.com/Haberkamp/phluent/commit/51ac2e9427a811e4c7b48410c9f6f56cdd2f9c13))
+* improve assertion message for toStartWith assertion ([c083dc0](https://github.com/Haberkamp/phluent/commit/c083dc048f23778a286d5e5c7d54c14493089c54))
+* improve assertion message forBePositive assertion ([db605b1](https://github.com/Haberkamp/phluent/commit/db605b1b7c883cf73c26e59c5a9a00bdf9b5a6d7))
+
 ## [0.4.1](https://github.com/Haberkamp/phluent/compare/v0.4.0...v0.4.1) (2024-08-11)
 
 
