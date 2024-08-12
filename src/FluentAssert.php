@@ -300,12 +300,17 @@ class FluentAssert extends Assert
 
     public function toBePositive(): void
     {
-        if ($this->inverse) {
-            self::assertLessThan(1, $this->value);
-            return;
+        $isPositive = $this->value > 0;
+
+        if ($this->inverse && $isPositive) {
+            self::fail('Expected value not to be positive, got ' . $this->value . '.');
         }
 
-        self::assertGreaterThan(0, $this->value);
+        if (!$this->inverse && !$isPositive) {
+            self::fail('Expected value to be positive, got ' . $this->value . '.');
+        }
+
+        self::succeed();
     }
 
     public function toBeGreaterThan(int|float $baseline): void
