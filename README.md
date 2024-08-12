@@ -29,7 +29,7 @@ The latter example is much easier to read and understand.
 
 ### ✍️ Authors
 
-Hello I'm Nils Haberkamp. I strongly believe that writing better tests makes one a better developer, leads to better
+Hello, I'm Nils Haberkamp. I strongly believe that writing better tests makes one a better developer, leads to better
 communication and collaboration and overall a better software. This package is my take on creating better tests.
 
 
