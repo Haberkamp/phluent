@@ -155,12 +155,17 @@ class FluentAssert extends Assert
 
     public function toStartWith(string $prefix): void
     {
-        if ($this->inverse) {
-            self::assertStringStartsNotWith($prefix, $this->value);
-            return;
+        $startsWithPrefix = str_starts_with($this->value, $prefix);
+
+        if ($this->inverse && $startsWithPrefix) {
+            self::fail('Expected "' . $this->value . '" not to start with "' . $prefix . '", but it does.');
         }
 
-        self::assertStringStartsWith($prefix, $this->value);
+        if (!$this->inverse && !$startsWithPrefix) {
+            self::fail('Expected "' . $this->value . '" to start with "' . $prefix . '", but it does not.');
+        }
+
+        self::succeed();
     }
 
     public function toEndWith(string $suffix): void
