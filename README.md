@@ -49,6 +49,36 @@ class SomeTest extends TestCase {
 }
 ```
 
+<details>
+<summary>Available assertions</summary>
+
+* toBeEmpty
+* toBe
+* toBeAnInteger
+* toBeNegative
+* toBeInBetween
+* toBePositive
+* toBeGreaterThan
+* toBeLessThan
+* toBeAFloat
+* toBeLessThanOrEqual
+* toBeGreaterThanOrEqual
+* toBeAString
+* toBeEmpty
+* toStartWith
+* toEndWith
+* toBeABoolean
+* toBeAnArray
+* toBeInstanceOf
+* toBeNull
+* toBeFalse
+* toBeTrue
+* toContainAllOf
+* toContainAnyOf
+* toContain
+* toHaveALengthOf
+</details>
+
 
 ## ⬇️ Installation
 
