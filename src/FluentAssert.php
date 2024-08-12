@@ -241,12 +241,16 @@ class FluentAssert extends Assert
 
     public function toBeAnInteger(): void
     {
-        if ($this->inverse) {
-            self::assertIsNotInt($this->value);
-            return;
+        $isAnInteger = is_int($this->value);
+        if ($this->inverse && $isAnInteger) {
+            self::fail('Expected value not to be an integer, got ' . Exporter::export($this->value) . '.');
         }
 
-        self::assertIsInt($this->value);
+        if (!$this->inverse && !is_int($this->value)) {
+            self::fail('Expected value to be an integer, got ' . Exporter::export($this->value) . '.');
+        }
+
+        self::succeed();
     }
 
     public function toBeNegative(): void
