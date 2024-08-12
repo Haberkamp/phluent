@@ -294,25 +294,17 @@ class FluentAssert extends Assert
 
     public function toBeInBetween(int|float $start, int|float $end): void
     {
-        if ($this->inverse) {
-            self::assertThat(
-                $this->value,
-                self::logicalOr(
-                    self::lessThan($start),
-                    self::greaterThan($end),
-                ),
-            );
+        $isInBetweenRange = $this->value >= $start && $this->value <= $end;
 
-            return;
+        if ($this->inverse && $isInBetweenRange) {
+            self::fail('Expected ' . $this->value . ' not to be in between ' . $start . ' and ' . $end . ', but it is.');
         }
 
-        self::assertThat(
-            $this->value,
-            self::logicalAnd(
-                self::greaterThanOrEqual($start),
-                self::lessThanOrEqual($end),
-            ),
-        );
+        if (!$this->inverse && !$isInBetweenRange) {
+            self::fail('Expected ' . $this->value . ' to be in between ' . $start . ' and ' . $end . ', but it is not.');
+        }
+
+        self::succeed();
     }
 
     public function toBeLessThan(int|float $baseline): void
