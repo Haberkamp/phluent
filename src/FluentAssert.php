@@ -126,11 +126,37 @@ class FluentAssert extends Assert
     public function toBeEmpty(): void
     {
         if ($this->inverse) {
-            self::assertNotEmpty($this->value);
+            if (is_string($this->value)) {
+                if (strlen($this->value) === 0) {
+                    self::fail('Expected string not to be empty, but it is.');
+                }
+
+                self::succeed();
+                return;
+            }
+
+            if (count($this->value) === 0) {
+                self::fail('Expected array not to be empty, but it is.');
+            }
+
+            self::succeed();
             return;
         }
 
-        self::assertEmpty($this->value);
+        if (is_string($this->value)) {
+            if (strlen($this->value) !== 0) {
+                self::fail('Expected string to be empty, got ' . Exporter::export($this->value) . '.');
+            }
+
+            self::succeed();
+            return;
+        }
+
+        if (count($this->value) !== 0) {
+            self::fail('Expected array to be empty, counted ' . count($this->value) . ' item(s): ' . Exporter::export($this->value));
+        }
+
+        self::succeed();
     }
 
     public function toBeAString(): void
