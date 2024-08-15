@@ -494,18 +494,21 @@ class FluentAssert extends Assert
     /**
      * @param class-string<Throwable>|null $class
      */
-    public function toThrow(?string $class = null): void
+    public function toThrow(?string $class = null)
     {
         $errorWasThrown = false;
         $correctErrorWasThrown = false;
+        $thrownError = null;
 
         if ($this->exception) {
             $errorWasThrown = true;
+            $thrownError = $this->exception;
         } else {
             try {
                 $this->value->__invoke();
             } catch (Throwable $error) {
                 $errorWasThrown = true;
+                $thrownError = $error;
 
                 if ($class !== null) {
                     $correctErrorWasThrown = $error instanceof $class;
@@ -529,7 +532,12 @@ class FluentAssert extends Assert
             }
 
             self::succeed();
-            return;
+            return new class () {
+                public function withMessage(): void
+                {
+                    throw new \RuntimeException('Cannot assert exception message when not expecting an exception to be thrown.');
+                }
+            };
         }
 
         if (!$errorWasThrown) {
@@ -540,7 +548,26 @@ class FluentAssert extends Assert
             self::fail('Expected ' . $class . ' to be thrown, but ' . $error::class . ' was thrown.');
         }
 
+        $modifier = new class (exception: $thrownError, succeed: fn () => self::succeed(), fail: fn (string $message) => self::fail($message)) {
+            public function __construct(private readonly \Exception $exception, private readonly mixed $succeed, private readonly mixed $fail)
+            {
+            }
+
+            public function withMessage(string $message): void
+            {
+                $correctMessage = $this->exception->getMessage() === $message;
+
+                if (!$correctMessage) {
+                    $this->fail->__invoke('Expected exception message to be "' . $message . '", but got "' . $this->exception->getMessage() . '".');
+                }
+
+                $this->succeed->__invoke();
+            }
+        };
+
         self::succeed();
+
+        return $modifier;
     }
 
     private function succeed(): void
@@ -551,9 +578,9 @@ class FluentAssert extends Assert
     /**
      * @param class-string<Throwable>|null $class
      */
-    public function toHaveThrown(?string $class = null): void
+    public function toHaveThrown(?string $class = null)
     {
-        $this->toThrow($class);
+        return $this->toThrow($class);
     }
 
     public function not(): static
