@@ -15,7 +15,8 @@
             "Phluent\\Tests\\": "tests/"
         },
         "files": [
-            "src/Expect.php"
+            "src/Expect.php",
+            "src/Act.php"
         ]
     },
     "minimum-stability": "dev",
