@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.5.0](https://github.com/Haberkamp/phluent/compare/v0.4.2...v0.5.0) (2024-08-16)
+
+
+### Features
+
+* add alternative way to assert assertions ([0b667a2](https://github.com/Haberkamp/phluent/commit/0b667a271c832accc6d012a639d324c64a28d990))
+* add assertion for exception messages ([e64e96a](https://github.com/Haberkamp/phluent/commit/e64e96a6d09d29d40db7fa1742ba17850eb18493))
+* add toHaveThrown alias for toThrow assertion ([af80cde](https://github.com/Haberkamp/phluent/commit/af80cdecbe71b398e3162330baa3f012dd0d0697))
+
 ## [0.4.2](https://github.com/Haberkamp/phluent/compare/v0.4.1...v0.4.2) (2024-08-12)
 
 
