@@ -2,6 +2,9 @@
 
 namespace Phluent;
 
+use Phluent\WithMessageSupplement\ErroredWithMessageSupplement;
+use Phluent\WithMessageSupplement\ValidWithMessageSupplement;
+use Phluent\WithMessageSupplement\WithMessageSupplement;
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\AssertionFailedError;
 use PHPUnit\Util\Exporter;
@@ -494,7 +497,7 @@ class FluentAssert extends Assert
     /**
      * @param class-string<Throwable>|null $class
      */
-    public function toThrow(?string $class = null)
+    public function toThrow(?string $class = null): WithMessageSupplement
     {
         $errorWasThrown = false;
         $correctErrorWasThrown = false;
@@ -520,7 +523,7 @@ class FluentAssert extends Assert
         if ($this->inverse) {
             if ($errorWasThrown && $class !== null && !$correctErrorWasThrown) {
                 self::succeed();
-                return;
+                return new ErroredWithMessageSupplement();
             }
 
             if ($errorWasThrown && isset($error) && $error instanceof Throwable) {
@@ -532,12 +535,7 @@ class FluentAssert extends Assert
             }
 
             self::succeed();
-            return new class () {
-                public function withMessage(): void
-                {
-                    throw new \RuntimeException('Cannot assert exception message when not expecting an exception to be thrown.');
-                }
-            };
+            return new ErroredWithMessageSupplement();
         }
 
         if (!$errorWasThrown) {
@@ -548,26 +546,12 @@ class FluentAssert extends Assert
             self::fail('Expected ' . $class . ' to be thrown, but ' . $error::class . ' was thrown.');
         }
 
-        $modifier = new class (exception: $thrownError, succeed: fn () => self::succeed(), fail: fn (string $message) => self::fail($message)) {
-            public function __construct(private readonly \Exception $exception, private readonly mixed $succeed, private readonly mixed $fail)
-            {
-            }
-
-            public function withMessage(string $message): void
-            {
-                $correctMessage = $this->exception->getMessage() === $message;
-
-                if (!$correctMessage) {
-                    $this->fail->__invoke('Expected exception message to be "' . $message . '", but got "' . $this->exception->getMessage() . '".');
-                }
-
-                $this->succeed->__invoke();
-            }
-        };
-
         self::succeed();
-
-        return $modifier;
+        return new ValidWithMessageSupplement(
+            exception: $thrownError,
+            succeed: fn () => self::succeed(),
+            fail: fn (string $message) => self::fail($message)
+        );
     }
 
     private function succeed(): void
@@ -578,7 +562,7 @@ class FluentAssert extends Assert
     /**
      * @param class-string<Throwable>|null $class
      */
-    public function toHaveThrown(?string $class = null)
+    public function toHaveThrown(?string $class = null): WithMessageSupplement
     {
         return $this->toThrow($class);
     }
