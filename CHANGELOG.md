@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.1](https://github.com/Haberkamp/phluent/compare/v0.5.0...v0.5.1) (2024-08-17)
+
+
+### Bug Fixes
+
+* add return type for exception assertions ([9fe9fe6](https://github.com/Haberkamp/phluent/commit/9fe9fe6efbc6ddfd5f3113e2395e1b46458846be))
+
 ## [0.5.0](https://github.com/Haberkamp/phluent/compare/v0.4.2...v0.5.0) (2024-08-16)
 
 
