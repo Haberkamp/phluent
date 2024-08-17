@@ -506,7 +506,7 @@ class FluentAssert extends Assert
         if ($this->exception) {
             $errorWasThrown = true;
             $thrownError = $this->exception;
-        } else {
+        } elseif (is_callable($this->value)) {
             try {
                 $this->value->__invoke();
             } catch (Throwable $error) {
@@ -536,6 +536,10 @@ class FluentAssert extends Assert
 
             self::succeed();
             return new ErroredWithMessageSupplement();
+        }
+
+        if (!$errorWasThrown && $class !== null) {
+            self::fail('Expected ' . $class . ' to be thrown, but no exception was thrown.');
         }
 
         if (!$errorWasThrown) {

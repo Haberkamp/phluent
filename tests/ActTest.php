@@ -32,6 +32,7 @@ class ActTest extends TestCase
 
         // ASSERT
         $this->expectException(AssertionFailedError::class);
+        $this->expectExceptionMessage('Expected Exception to be thrown, but no exception was thrown.');
 
         // ACT
         $result = Act($callback);
