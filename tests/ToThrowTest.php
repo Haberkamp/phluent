@@ -83,6 +83,20 @@ class ToThrowTest extends TestCase
     }
 
     #[Test]
+    public function fails_when_expecting_specific_exception_to_be_thrown_but_none_gets_thrown(): void
+    {
+        // ARRANGE
+        $callback = fn () => null;
+
+        // ASSERT
+        $this->expectException(AssertionFailedError::class);
+        $this->expectExceptionMessage('Expected InvalidArgumentException to be thrown, but no exception was thrown.');
+
+        // ACT
+        Expect($callback)->toThrow(\InvalidArgumentException::class);
+    }
+
+    #[Test]
     public function passes_when_expecting_specific_exception_not_to_be_thrown_and_a_different_exception_gets_thrown(): void
     {
         // ARRANGE

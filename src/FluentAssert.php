@@ -538,6 +538,10 @@ class FluentAssert extends Assert
             return new ErroredWithMessageSupplement();
         }
 
+        if (!$errorWasThrown && $class !== null) {
+            self::fail('Expected ' . $class . ' to be thrown, but no exception was thrown.');
+        }
+
         if (!$errorWasThrown) {
             self::fail('Expected an exception to be thrown, but no exception was thrown.');
         }
