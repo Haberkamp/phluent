@@ -77,6 +77,10 @@ class SomeTest extends TestCase {
 * toContainAnyOf
 * toContain
 * toHaveALengthOf
+* toThrow
+  * withMessage
+* toHaveThrown
+  * withMessage
 </details>
 
 
