@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.5.2](https://github.com/Haberkamp/phluent/compare/v0.5.1...v0.5.2) (2024-08-17)
+
+
+### Bug Fixes
+
+* update assertion message when checking for specific assertion using Act ([c70b2c3](https://github.com/Haberkamp/phluent/commit/c70b2c3959adbe9f50365d3fac12efe4df11c4f4))
+* update assertion message when checking for specific exception but none was thrown ([cdfbc3f](https://github.com/Haberkamp/phluent/commit/cdfbc3f02f9b830b02463e3d781a69784480ed13))
+
 ## [0.5.1](https://github.com/Haberkamp/phluent/compare/v0.5.0...v0.5.1) (2024-08-17)
 
 
