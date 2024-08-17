@@ -506,7 +506,7 @@ class FluentAssert extends Assert
         if ($this->exception) {
             $errorWasThrown = true;
             $thrownError = $this->exception;
-        } else {
+        } elseif (is_callable($this->value)) {
             try {
                 $this->value->__invoke();
             } catch (Throwable $error) {
