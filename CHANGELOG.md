@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.3](https://github.com/Haberkamp/phluent/compare/v0.5.2...v0.5.3) (2024-08-19)
+
+
+### Bug Fixes
+
+* get rid of PHPUnit's Exporter ([0326c1b](https://github.com/Haberkamp/phluent/commit/0326c1bacaa3ba1c69f286301b59e9e180b537c3))
+
 ## [0.5.2](https://github.com/Haberkamp/phluent/compare/v0.5.1...v0.5.2) (2024-08-17)
 
 
