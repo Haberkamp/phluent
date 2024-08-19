@@ -28,7 +28,7 @@ class ToBeNullTest extends TestCase
     #[TestWith(['some-string', 'Expected value to be null, got \'some-string\''])]
     #[TestWith([0, 'Expected value to be null, got 0.'])]
     #[TestWith([1, 'Expected value to be null, got 1.'])]
-    #[TestWith([[], 'Expected value to be null, got Array &0 [].'])]
+    #[TestWith([[], 'Expected value to be null, got Array (0) [].'])]
     public function fails_when_expecting_null_and_not_getting_null(mixed $value, string $message): void
     {
         // ASSERT

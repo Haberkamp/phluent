@@ -26,7 +26,7 @@ class ToBeABooleanTest extends TestCase
     #[TestWith(['true', 'Expected value to be a boolean, got \'true\'.'])]
     #[TestWith(['false', 'Expected value to be a boolean, got \'false\'.'])]
     #[TestWith([null, 'Expected value to be a boolean, got null.'])]
-    #[TestWith([[], 'Expected value to be a boolean, got Array &0 [].'])]
+    #[TestWith([[], 'Expected value to be a boolean, got Array (0) [].'])]
     public function fails_when_expecting_a_boolean_value_and_not_getting_a_boolean_value(mixed $value, string $message): void
     {
         // ASSERT

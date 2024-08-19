@@ -27,7 +27,7 @@ class ToBeAnIntegerTest extends TestCase
     #[TestWith([false, 'Expected value to be an integer, got false.'])]
     #[TestWith(['1', 'Expected value to be an integer, got \'1\'.'])]
     #[TestWith([1.87, 'Expected value to be an integer, got 1.87.'])]
-    #[TestWith([[], 'Expected value to be an integer, got Array &0 [].'])]
+    #[TestWith([[], 'Expected value to be an integer, got Array (0) [].'])]
     public function test_fails_when_expecting_an_integer_and_not_getting_one(mixed $value, string $message): void
     {
         // ASSERT

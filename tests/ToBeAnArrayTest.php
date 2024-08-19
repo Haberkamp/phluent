@@ -60,7 +60,7 @@ class ToBeAnArrayTest extends TestCase
 
         // ASSERT
         $this->expectException(AssertionFailedError::class);
-        $this->expectExceptionMessage('Expected value not to be an array, got Array &0 [].');
+        $this->expectExceptionMessage('Expected value not to be an array, got Array (0) [].');
 
         // ACT
         Expect($value)->not()->toBeAnArray();

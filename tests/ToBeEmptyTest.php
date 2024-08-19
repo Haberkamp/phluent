@@ -80,7 +80,7 @@ class ToBeEmptyTest extends TestCase
         // ASSERT
         $this->expectException(AssertionFailedError::class);
         $this->expectExceptionMessage(
-            "Expected array to be empty, counted 3 item(s): Array &0 [\n    0 => 1,\n    1 => 2,\n    2 => 3,\n]"
+            "Expected array to be empty, counted 3 item(s): Array (3) [1, 2, 3]"
         );
 
         // ACT
