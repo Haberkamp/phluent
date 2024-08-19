@@ -23,10 +23,10 @@ class ToContainAnyOfTest extends TestCase
     }
 
     #[Test]
-    #[TestWith([['foo', 'bar', 'baz'], ['qux'], "Expected array to contain any of the expected items Array &0 [\n    0 => 'qux',\n], but it does not: Array &0 [\n    0 => 'foo',\n    1 => 'bar',\n    2 => 'baz',\n]"])]
-    #[TestWith([[1, 'foo', 3], [false, true], "Expected array to contain any of the expected items Array &0 [\n    0 => false,\n    1 => true,\n], but it does not: Array &0 [\n    0 => 1,\n    1 => 'foo',\n    2 => 3,\n]"])]
-    #[TestWith([[1, 2, true], [3, 'bar'], "Expected array to contain any of the expected items Array &0 [\n    0 => 3,\n    1 => 'bar',\n], but it does not: Array &0 [\n    0 => 1,\n    1 => 2,\n    2 => true,\n]"])]
-    #[TestWith([[null, true, true], [2], "Expected array to contain any of the expected items Array &0 [\n    0 => 2,\n], but it does not: Array &0 [\n    0 => null,\n    1 => true,\n    2 => true,\n]"])]
+    #[TestWith([['foo', 'bar', 'baz'], ['qux'], "Expected array to contain any of the expected items Array (1) ['qux'], but it does not: Array (3) ['foo', 'bar', 'baz']"])]
+    #[TestWith([[1, 'foo', 3], [false, true], "Expected array to contain any of the expected items Array (2) [false, true], but it does not: Array (3) [1, 'foo', 3]"])]
+    #[TestWith([[1, 2, true], [3, 'bar'], "Expected array to contain any of the expected items Array (2) [3, 'bar'], but it does not: Array (3) [1, 2, true]"])]
+    #[TestWith([[null, true, true], [2], "Expected array to contain any of the expected items Array (1) [2], but it does not: Array (3) [null, true, true]"])]
     public function fails_when_expecting_array_to_contain_any_of_the_expected_items_but_it_does_not_contain_any_of_them(array $value, array $expected, string $message): void
     {
         // ASSERT
@@ -49,10 +49,10 @@ class ToContainAnyOfTest extends TestCase
     }
 
     #[Test]
-    #[TestWith([['foo', 'bar', 'baz'], ['foo'], "Expected array not to contain any of the expected items Array &0 [\n    0 => 'foo',\n], but it does: Array &0 [\n    0 => 'foo',\n    1 => 'bar',\n    2 => 'baz',\n]"])]
-    #[TestWith([[1, 'foo', 3], [3], "Expected array not to contain any of the expected items Array &0 [\n    0 => 3,\n], but it does: Array &0 [\n    0 => 1,\n    1 => 'foo',\n    2 => 3,\n]"])]
-    #[TestWith([[1, 2, true], [1, 2], "Expected array not to contain any of the expected items Array &0 [\n    0 => 1,\n    1 => 2,\n], but it does: Array &0 [\n    0 => 1,\n    1 => 2,\n    2 => true,\n]"])]
-    #[TestWith([[null, true, true], [null, 2], "Expected array not to contain any of the expected items Array &0 [\n    0 => null,\n    1 => 2,\n], but it does: Array &0 [\n    0 => null,\n    1 => true,\n    2 => true,\n]"])]
+    #[TestWith([['foo', 'bar', 'baz'], ['foo'], "Expected array not to contain any of the expected items Array (1) ['foo'], but it does: Array (3) ['foo', 'bar', 'baz']"])]
+    #[TestWith([[1, 'foo', 3], [3], "Expected array not to contain any of the expected items Array (1) [3], but it does: Array (3) [1, 'foo', 3]"])]
+    #[TestWith([[1, 2, true], [1, 2], "Expected array not to contain any of the expected items Array (2) [1, 2], but it does: Array (3) [1, 2, true]"])]
+    #[TestWith([[null, true, true], [null, 2], "Expected array not to contain any of the expected items Array (2) [null, 2], but it does: Array (3) [null, true, true]"])]
     public function fails_when_expecting_array_not_to_contain_any_of_the_expected_items_but_it_does_contain_at_least_one_of_them(array $value, array $expected, string $message): void
     {
         // ASSERT

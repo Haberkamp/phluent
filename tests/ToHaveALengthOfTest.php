@@ -28,7 +28,7 @@ class ToHaveALengthOfTest extends TestCase
 
         // ASSERT
         $this->expectException(AssertionFailedError::class);
-        $this->expectExceptionMessage("Expected array to contain 1 items(s), but found 2 item(s): Array &0 [\n    0 => 'Hello',\n    1 => 'World',\n]");
+        $this->expectExceptionMessage("Expected array to contain 1 items(s), but found 2 item(s): Array (2) ['Hello', 'World']");
 
         // ACT
         Expect($value)->toHaveALengthOf(1);
@@ -52,7 +52,7 @@ class ToHaveALengthOfTest extends TestCase
 
         // ASSERT
         $this->expectException(AssertionFailedError::class);
-        $this->expectExceptionMessage("Expected array not to contain 1 items(s), but found 1 item(s): Array &0 [\n    0 => 'Hello',\n]");
+        $this->expectExceptionMessage("Expected array not to contain 1 items(s), but found 1 item(s): Array (1) ['Hello']");
 
         // ACT
         Expect($value)->not()->toHaveALengthOf(1);

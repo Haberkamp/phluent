@@ -30,7 +30,7 @@ class ToBeAFloatTest extends TestCase
     #[TestWith(['1', 'Expected \'1\' to be a float, but it is not.'])]
     #[TestWith([1, 'Expected 1 to be a float, but it is not.'])]
     #[TestWith([0, 'Expected 0 to be a float, but it is not.'])]
-    #[TestWith([[], 'Expected Array &0 [] to be a float, but it is not.'])]
+    #[TestWith([[], 'Expected Array (0) [] to be a float, but it is not.'])]
     public function fails_when_expecting_a_float_and_not_getting_one(mixed $value, string $message): void
     {
         // ASSERT

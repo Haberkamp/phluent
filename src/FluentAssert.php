@@ -7,7 +7,6 @@ use Phluent\WithMessageSupplement\ValidWithMessageSupplement;
 use Phluent\WithMessageSupplement\WithMessageSupplement;
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\AssertionFailedError;
-use PHPUnit\Util\Exporter;
 use Throwable;
 
 class FluentAssert extends Assert
@@ -72,7 +71,7 @@ class FluentAssert extends Assert
     {
         if ($this->inverse) {
             if (is_bool($this->value)) {
-                self::fail('Expected value not to be a boolean, got ' . Exporter::export($this->value) . '.');
+                self::fail('Expected value not to be a boolean, got ' . Serializer::serialize($this->value) . '.');
             }
 
             self::succeed();
@@ -80,7 +79,7 @@ class FluentAssert extends Assert
         }
 
         if (!is_bool($this->value)) {
-            self::fail('Expected value to be a boolean, got ' . Exporter::export($this->value) . '.');
+            self::fail('Expected value to be a boolean, got ' . Serializer::serialize($this->value) . '.');
         }
 
         self::succeed();
@@ -98,7 +97,7 @@ class FluentAssert extends Assert
         }
 
         if (!is_null($this->value)) {
-            self::fail('Expected value to be null, got ' . Exporter::export($this->value) . '.');
+            self::fail('Expected value to be null, got ' . Serializer::serialize($this->value) . '.');
         }
 
         self::succeed();
@@ -109,7 +108,7 @@ class FluentAssert extends Assert
         if ($this->inverse) {
             if (is_array($this->value)) {
                 if (count($this->value) === $length) {
-                    self::fail('Expected array not to contain ' . $length . ' items(s), but found ' . count($this->value) . ' item(s): ' . Exporter::export($this->value));
+                    self::fail('Expected array not to contain ' . $length . ' items(s), but found ' . count($this->value) . ' item(s): ' . Serializer::serialize($this->value));
                 }
 
                 self::succeed();
@@ -117,7 +116,7 @@ class FluentAssert extends Assert
             }
 
             if (strlen($this->value) === $length) {
-                self::fail('Expected string not to contain ' . $length . ' character(s), but found ' . strlen($this->value) . ' character(s): ' . Exporter::export($this->value));
+                self::fail('Expected string not to contain ' . $length . ' character(s), but found ' . strlen($this->value) . ' character(s): ' . Serializer::serialize($this->value));
             }
 
             self::succeed();
@@ -126,7 +125,7 @@ class FluentAssert extends Assert
 
         if (is_array($this->value)) {
             if (count($this->value) !== $length) {
-                self::fail('Expected array to contain ' . $length . ' items(s), but found ' . count($this->value) . ' item(s): ' . Exporter::export($this->value));
+                self::fail('Expected array to contain ' . $length . ' items(s), but found ' . count($this->value) . ' item(s): ' . Serializer::serialize($this->value));
             }
 
             self::succeed();
@@ -134,7 +133,7 @@ class FluentAssert extends Assert
         }
 
         if (strlen($this->value) !== $length) {
-            self::fail('Expected string to contain ' . $length . ' character(s), but found ' . strlen($this->value) . ' character(s): ' . Exporter::export($this->value));
+            self::fail('Expected string to contain ' . $length . ' character(s), but found ' . strlen($this->value) . ' character(s): ' . Serializer::serialize($this->value));
         }
 
         self::succeed();
@@ -162,7 +161,7 @@ class FluentAssert extends Assert
 
         if (is_string($this->value)) {
             if (strlen($this->value) !== 0) {
-                self::fail('Expected string to be empty, got ' . Exporter::export($this->value) . '.');
+                self::fail('Expected string to be empty, got ' . Serializer::serialize($this->value) . '.');
             }
 
             self::succeed();
@@ -170,7 +169,7 @@ class FluentAssert extends Assert
         }
 
         if (count($this->value) !== 0) {
-            self::fail('Expected array to be empty, counted ' . count($this->value) . ' item(s): ' . Exporter::export($this->value));
+            self::fail('Expected array to be empty, counted ' . count($this->value) . ' item(s): ' . Serializer::serialize($this->value));
         }
 
         self::succeed();
@@ -181,11 +180,11 @@ class FluentAssert extends Assert
         $isAString = is_string($this->value);
 
         if ($this->inverse && $isAString) {
-            self::fail('Expected value not to be a string, got ' . Exporter::export($this->value) . '.');
+            self::fail('Expected value not to be a string, got ' . Serializer::serialize($this->value) . '.');
         }
 
         if (!$this->inverse && !$isAString) {
-            self::fail('Expected value to be a string, got ' . Exporter::export($this->value) . '.');
+            self::fail('Expected value to be a string, got ' . Serializer::serialize($this->value) . '.');
         }
 
         self::succeed();
@@ -196,11 +195,11 @@ class FluentAssert extends Assert
         $isSame = $this->value === $string;
 
         if ($this->inverse && $isSame) {
-            self::fail('Expected ' . Exporter::export($this->value) . ' not to be the same as ' . Exporter::export($string) . ', but it is.');
+            self::fail('Expected ' . Serializer::serialize($this->value) . ' not to be the same as ' . Serializer::serialize($string) . ', but it is.');
         }
 
         if (!$this->inverse && !$isSame) {
-            self::fail('Expected ' . Exporter::export($this->value) . ' to be the same as ' . Exporter::export($string) . ', but it is not.');
+            self::fail('Expected ' . Serializer::serialize($this->value) . ' to be the same as ' . Serializer::serialize($string) . ', but it is not.');
         }
 
         self::succeed();
@@ -241,7 +240,7 @@ class FluentAssert extends Assert
         if ($this->inverse) {
             if (is_array($this->value)) {
                 if (in_array($item, $this->value, true)) {
-                    self::fail('Expected array not to contain ' . Exporter::export($item) . ', but it does: ' . Exporter::export($this->value));
+                    self::fail('Expected array not to contain ' . Serializer::serialize($item) . ', but it does: ' . Serializer::serialize($this->value));
                 }
 
                 self::succeed();
@@ -249,7 +248,7 @@ class FluentAssert extends Assert
             }
 
             if (str_contains($this->value, $item)) {
-                self::fail('Expected string ' . Exporter::export($this->value) . ' not to contain ' . Exporter::export($item) . ', but it does.');
+                self::fail('Expected string ' . Serializer::serialize($this->value) . ' not to contain ' . Serializer::serialize($item) . ', but it does.');
             }
 
             self::succeed();
@@ -258,7 +257,7 @@ class FluentAssert extends Assert
 
         if (is_array($this->value)) {
             if (!in_array($item, $this->value, true)) {
-                self::fail('Expected array to contain ' . Exporter::export($item) . ', but it does not: ' . Exporter::export($this->value));
+                self::fail('Expected array to contain ' . Serializer::serialize($item) . ', but it does not: ' . Serializer::serialize($this->value));
             }
 
             self::succeed();
@@ -266,7 +265,7 @@ class FluentAssert extends Assert
         }
 
         if (!str_contains($this->value, $item)) {
-            self::fail('Expected string ' . Exporter::export($this->value) . ' to contain ' . Exporter::export($item) . ', but it does not.');
+            self::fail('Expected string ' . Serializer::serialize($this->value) . ' to contain ' . Serializer::serialize($item) . ', but it does not.');
         }
 
         self::succeed();
@@ -277,11 +276,11 @@ class FluentAssert extends Assert
         $isAFloat = is_float($this->value);
 
         if ($this->inverse && $isAFloat) {
-            self::fail('Expected ' . Exporter::export($this->value) . ' not to be a float, but it is.');
+            self::fail('Expected ' . Serializer::serialize($this->value) . ' not to be a float, but it is.');
         }
 
         if (!$this->inverse && !$isAFloat) {
-            self::fail('Expected ' . Exporter::export($this->value) . ' to be a float, but it is not.');
+            self::fail('Expected ' . Serializer::serialize($this->value) . ' to be a float, but it is not.');
         }
 
         self::succeed();
@@ -291,11 +290,11 @@ class FluentAssert extends Assert
     {
         $isAnInteger = is_int($this->value);
         if ($this->inverse && $isAnInteger) {
-            self::fail('Expected value not to be an integer, got ' . Exporter::export($this->value) . '.');
+            self::fail('Expected value not to be an integer, got ' . Serializer::serialize($this->value) . '.');
         }
 
         if (!$this->inverse && !is_int($this->value)) {
-            self::fail('Expected value to be an integer, got ' . Exporter::export($this->value) . '.');
+            self::fail('Expected value to be an integer, got ' . Serializer::serialize($this->value) . '.');
         }
 
         self::succeed();
@@ -409,7 +408,7 @@ class FluentAssert extends Assert
     {
         if ($this->inverse) {
             if (is_array($this->value)) {
-                self::fail('Expected value not to be an array, got ' . Exporter::export($this->value) . '.');
+                self::fail('Expected value not to be an array, got ' . Serializer::serialize($this->value) . '.');
             }
 
             self::succeed();
@@ -417,7 +416,7 @@ class FluentAssert extends Assert
         }
 
         if (!is_array($this->value)) {
-            self::fail('Expected value to be an array, got ' . Exporter::export($this->value) . '.');
+            self::fail('Expected value to be an array, got ' . Serializer::serialize($this->value) . '.');
         }
 
         self::succeed();
@@ -438,7 +437,7 @@ class FluentAssert extends Assert
 
         if ($this->inverse) {
             if ($containsAtLeastOne) {
-                self::fail('Expected array not to contain any of the expected items ' . Exporter::export($items) . ', but it does: ' . Exporter::export($this->value));
+                self::fail('Expected array not to contain any of the expected items ' . Serializer::serialize($items) . ', but it does: ' . Serializer::serialize($this->value));
             }
 
             self::succeed();
@@ -446,7 +445,7 @@ class FluentAssert extends Assert
         }
 
         if (!$containsAtLeastOne) {
-            self::fail('Expected array to contain any of the expected items ' . Exporter::export($items) . ', but it does not: ' . Exporter::export($this->value));
+            self::fail('Expected array to contain any of the expected items ' . Serializer::serialize($items) . ', but it does not: ' . Serializer::serialize($this->value));
         }
 
         self::succeed();

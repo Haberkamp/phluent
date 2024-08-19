@@ -30,7 +30,7 @@ class ToBeAStringTest extends TestCase
     #[TestWith([1, 'Expected value to be a string, got 1.'])]
     #[TestWith([0.0, 'Expected value to be a string, got 0.'])]
     #[TestWith([1.0, 'Expected value to be a string, got 1.'])]
-    #[TestWith([[], 'Expected value to be a string, got Array &0 [].'])]
+    #[TestWith([[], 'Expected value to be a string, got Array (0) [].'])]
     public function fails_when_expecting_a_string_value_but_not_getting_string(mixed $value, string $message): void
     {
         // ASSERT

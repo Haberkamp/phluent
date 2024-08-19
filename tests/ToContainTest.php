@@ -28,12 +28,12 @@ class ToContainTest extends TestCase
     }
 
     #[Test]
-    #[TestWith(['foo', "Expected array to contain 'foo', but it does not: Array &0 [\n    0 => 'bar',\n    1 => 'baz',\n]"])]
-    #[TestWith([1, "Expected array to contain 1, but it does not: Array &0 [\n    0 => 'bar',\n    1 => 'baz',\n]"])]
-    #[TestWith([1.0, "Expected array to contain 1.0, but it does not: Array &0 [\n    0 => 'bar',\n    1 => 'baz',\n]"])]
-    #[TestWith([true, "Expected array to contain true, but it does not: Array &0 [\n    0 => 'bar',\n    1 => 'baz',\n]"])]
-    #[TestWith([false, "Expected array to contain false, but it does not: Array &0 [\n    0 => 'bar',\n    1 => 'baz',\n]"])]
-    #[TestWith([null, "Expected array to contain null, but it does not: Array &0 [\n    0 => 'bar',\n    1 => 'baz',\n]"])]
+    #[TestWith(['foo', "Expected array to contain 'foo', but it does not: Array (2) ['bar', 'baz']"])]
+    #[TestWith([1, "Expected array to contain 1, but it does not: Array (2) ['bar', 'baz']"])]
+    #[TestWith([1.0, "Expected array to contain 1.0, but it does not: Array (2) ['bar', 'baz']"])]
+    #[TestWith([true, "Expected array to contain true, but it does not: Array (2) ['bar', 'baz']"])]
+    #[TestWith([false, "Expected array to contain false, but it does not: Array (2) ['bar', 'baz']"])]
+    #[TestWith([null, "Expected array to contain null, but it does not: Array (2) ['bar', 'baz']"])]
     public function fails_when_expecting_array_to_contain_expected_item_but_is_is_not_inside_the_array(mixed $item, string $message): void
     {
         // ARRANGE
@@ -64,12 +64,12 @@ class ToContainTest extends TestCase
     }
 
     #[Test]
-    #[TestWith(['foo', "Expected array not to contain 'foo', but it does: Array &0 [\n    0 => 'foo',\n    1 => 'bar',\n    2 => 'baz',\n]"])]
-    #[TestWith([1, "Expected array not to contain 1, but it does: Array &0 [\n    0 => 1,\n    1 => 'bar',\n    2 => 'baz',\n]"])]
-    #[TestWith([1.0, "Expected array not to contain 1.0, but it does: Array &0 [\n    0 => 1.0,\n    1 => 'bar',\n    2 => 'baz',\n]"])]
-    #[TestWith([true, "Expected array not to contain true, but it does: Array &0 [\n    0 => true,\n    1 => 'bar',\n    2 => 'baz',\n]"])]
-    #[TestWith([false, "Expected array not to contain false, but it does: Array &0 [\n    0 => false,\n    1 => 'bar',\n    2 => 'baz',\n]"])]
-    #[TestWith([null, "Expected array not to contain null, but it does: Array &0 [\n    0 => null,\n    1 => 'bar',\n    2 => 'baz',\n]"])]
+    #[TestWith(['foo', "Expected array not to contain 'foo', but it does: Array (3) ['foo', 'bar', 'baz']"])]
+    #[TestWith([1, "Expected array not to contain 1, but it does: Array (3) [1, 'bar', 'baz']"])]
+    #[TestWith([1.0, "Expected array not to contain 1.0, but it does: Array (3) [1.0, 'bar', 'baz']"])]
+    #[TestWith([true, "Expected array not to contain true, but it does: Array (3) [true, 'bar', 'baz']"])]
+    #[TestWith([false, "Expected array not to contain false, but it does: Array (3) [false, 'bar', 'baz']"])]
+    #[TestWith([null, "Expected array not to contain null, but it does: Array (3) [null, 'bar', 'baz']"])]
     public function fails_when_expecting_array_not_to_contain_expected_item_but_the_array_contains_the_item(mixed $item, string $message): void
     {
         // ARRANGE
